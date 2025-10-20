@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MovementStateResource" load_steps=2 format=3 uid="uid://dd5hsc5a3imx6"]
+
+[ext_resource type="Script" uid="uid://b1ydx7ror70hj" path="res://Resources/Player States/MovementStateResource.gd" id="1_otm2d"]
+
+[resource]
+script = ExtResource("1_otm2d")
+metadata/_custom_type_script = "uid://b1ydx7ror70hj"
