@@ -4,8 +4,9 @@ extends MovementState
 @export var move_state: MovementState
 
 var move_direction: Vector3
-var cam_rotation : float
+var cam_rotation: float
 var move_resource = preload("res://Resources/Player States/move_state.tres")
+
 
 func _process_physics(_delta: float) -> MovementState:
 	move_direction = get_movement_input()
@@ -23,7 +24,7 @@ func _process_physics(_delta: float) -> MovementState:
 
 	parent_obj.velocity = parent_obj.velocity.move_toward(
 		calculated_velocity,
-		move_resource.acceleration * _delta
+		move_resource.acceleration * _delta,
 	)
 
 	parent_obj.velocity.y -= gravity * move_resource.gravity_fall_multiplier * _delta

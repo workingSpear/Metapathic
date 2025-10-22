@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Player_Prefrences" load_steps=2 format=3 uid="uid://bt1nk088xqta2"]
 
-[ext_resource type="Script" uid="uid://btd4t6o2xffig" path="res://Resources/player_prefrences.gd" id="1_sy0jg"]
+[ext_resource type="Script" uid="uid://btd4t6o2xffig" path="res://Scripts/Resource Formats/player_preferences.gd" id="1_sy0jg"]
 
 [resource]
 script = ExtResource("1_sy0jg")
