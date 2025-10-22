@@ -7,8 +7,8 @@ var current_state: MovementState
 
 # Initialize the state machine by giving each child state a reference to the
 # parent object it belongs to and enter the default starting_state.
-func init(parent: CharacterBody3D,mesh_holder: Node3D , move_component) -> void:
-	for child in get_children():
+func init(parent: CharacterBody3D,mesh_holder: Node3D , move_component: PlayerMoveComponent) -> void:
+	for child: MovementState in get_children():
 		child.parent_obj = parent
 		child.mesh_holder = mesh_holder
 		child.move_component = move_component
@@ -23,7 +23,7 @@ func change_state(new_state: MovementState) -> void:
 	print("Now entering: ",new_state.name)
 	current_state = new_state
 	current_state._enter()
-	
+
 # Pass through functions for the Player to call,
 # handling state changes as needed.
 func process_physics(delta: float) -> void:

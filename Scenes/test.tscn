@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cb1vrs51wlmxm" path="res://Scripts/Player/player_movement_component.gd" id="3_qc4db"]
 [ext_resource type="Script" uid="uid://dwkuy5p60r3i5" path="res://Scripts/Player/States/idle.gd" id="3_ys1qc"]
 [ext_resource type="Script" uid="uid://c3fmm64j3llva" path="res://Scripts/Player/States/move.gd" id="5_i3aeo"]
-[ext_resource type="Script" uid="uid://d0e8tvb8nlf5v" path="res://Scenes/jump.gd" id="6_5wyu1"]
+[ext_resource type="Script" uid="uid://d0e8tvb8nlf5v" path="res://Scripts/Player/States/jump.gd" id="6_5wyu1"]
 [ext_resource type="Script" uid="uid://ceh74nd0nrk6a" path="res://Scripts/Player/States/fall.gd" id="7_0c07c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3qbn"]
@@ -101,3 +101,5 @@ move_state = NodePath("../Move")
 script = ExtResource("3_qc4db")
 
 [connection signal="set_cam_rotation" from="Player/CameraHolder" to="Player/MovementStateMachine/Move" method="_on_camera_holder_set_cam_rotation"]
+[connection signal="set_cam_rotation" from="Player/CameraHolder" to="Player/MovementStateMachine/Jump" method="_on_camera_holder_set_cam_rotation"]
+[connection signal="set_cam_rotation" from="Player/CameraHolder" to="Player/MovementStateMachine/Fall" method="_on_camera_holder_set_cam_rotation"]

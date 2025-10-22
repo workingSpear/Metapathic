@@ -1,3 +1,4 @@
+class_name PlayerMoveComponent
 extends Node
 
 func get_movement_direction() -> Vector3:
@@ -8,4 +9,4 @@ func get_movement_direction() -> Vector3:
 
 # Return a boolean indicating if the character wants to jump
 func wants_jump() -> bool:
-	return 0
+	return Input.is_action_just_pressed("jump")
