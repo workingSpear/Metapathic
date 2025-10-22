@@ -1,4 +1,4 @@
-class_name MovementStateResource
+class_name MoveStateData
 extends Resource
 
 @export var move_speed: float = 15

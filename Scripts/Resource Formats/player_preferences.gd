@@ -1,4 +1,4 @@
-class_name Player_Prefrences
+class_name PlayerPreferences
 extends Resource
 
 @export var yaw_sensitivity: float

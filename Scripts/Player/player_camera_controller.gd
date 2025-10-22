@@ -1,3 +1,4 @@
+class_name PlayerCameraController
 extends Node
 
 signal set_cam_rotation(cam_rotation: float)
@@ -10,7 +11,7 @@ signal set_cam_rotation(cam_rotation: float)
 @export var pitch_max: float = 30
 @export var pitch_min: float = -70
 
-var player_prefrences: Player_Prefrences = preload("res://Resources/player_preferences.tres")
+var player_preferences: PlayerPreferences = preload("res://Resources/player_preferences.tres")
 var yaw: float = 0
 var pitch: float = 0
 var yaw_sensitivity: float
@@ -19,8 +20,8 @@ var pitch_sensitivity: float
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	yaw_sensitivity = player_prefrences.yaw_sensitivity
-	pitch_sensitivity = player_prefrences.pitch_sensitivity
+	yaw_sensitivity = player_preferences.yaw_sensitivity
+	pitch_sensitivity = player_preferences.pitch_sensitivity
 
 
 func _physics_process(delta: float) -> void:

@@ -1,22 +1,26 @@
 class_name Player
 extends CharacterBody3D
 
-@onready var movement_state_machine: Node = $MovementStateMachine
-@onready var player_move_component = $PlayerMovementComponent
+var player_move_data: MoveStateData = preload("res://Resources/Player States/move_state.tres")
+
+@onready var move_state_machine: MoveStateMachine = $MoveStateMachine
+@onready var player_move_input_component: PlayerMoveInputComponent = $PlayerMoveInputComponent
 @onready var mesh_holder = $MeshHolder
+@onready var camera_holder: PlayerCameraController = $PlayerCameraHolder
 
 
 func _ready() -> void:
-	movement_state_machine.init(self, mesh_holder, player_move_component)
+	camera_holder.set_cam_rotation.connect(player_move_input_component._on_camera_holder_set_cam_rotation)
+	move_state_machine.init(self, mesh_holder, player_move_input_component, player_move_data)
 
 
 func _process(delta: float) -> void:
-	movement_state_machine.process_frame(delta)
+	move_state_machine.process_frame(delta)
 
 
 func _physics_process(delta: float) -> void:
-	movement_state_machine.process_physics(delta)
+	move_state_machine.process_physics(delta)
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	movement_state_machine.process_input(event)
+	move_state_machine.process_input(event)
