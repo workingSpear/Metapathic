@@ -1,7 +1,16 @@
-[gd_resource type="Resource" script_class="MovementStateResource" load_steps=2 format=3 uid="uid://dd5hsc5a3imx6"]
+[gd_resource type="Resource" script_class="MoveStateData" load_steps=2 format=3 uid="uid://dd5hsc5a3imx6"]
 
 [ext_resource type="Script" uid="uid://b1ydx7ror70hj" path="res://Scripts/Resource Formats/move_state_data.gd" id="1_otm2d"]
 
 [resource]
 script = ExtResource("1_otm2d")
+move_speed = 30.0
+move_speed_sprint = 30.0
+acceleration = 100.0
+camera_fov = 75.0
+gravity_jump_multiplier = 0.75
+gravity_fall_multiplier = 1.0
+gravity_dive_multiplier = 1.0
+dive_speed_min = 30.0
+dive_speed_boost = 20.0
 metadata/_custom_type_script = "uid://b1ydx7ror70hj"

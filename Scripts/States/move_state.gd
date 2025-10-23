@@ -2,10 +2,10 @@ class_name MoveState
 extends Node
 
 var gravity: int = ProjectSettings.get_setting("physics/3d/default_gravity")
-var move_component: MoveInputComponent
-var move_data: MoveStateData
 var parent_obj: CharacterBody3D
 var mesh_holder: Node3D
+var move_component: MoveInputComponent
+var move_data: MoveStateData
 
 
 func enter() -> void:
@@ -54,3 +54,7 @@ func get_jump_hold() -> bool:
 
 func get_sprint() -> bool:
 	return move_component.wants_sprint()
+
+
+func get_dive() -> bool:
+	return move_component.wants_dive()

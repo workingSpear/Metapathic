@@ -3,6 +3,7 @@ extends MoveState
 @export var fall_state: MoveState
 @export var idle_state: MoveState
 @export var move_state: MoveState
+@export var dive_state: MoveState
 @export var jump_force: float = 20.0
 
 
@@ -34,5 +35,8 @@ func process_physics(delta: float) -> MoveState:
 
 	if not get_jump_hold() or parent_obj.velocity.y < 0:
 		return fall_state
+
+	if get_dive():
+		return dive_state
 
 	return null

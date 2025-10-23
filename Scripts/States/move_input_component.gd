@@ -30,3 +30,7 @@ func wants_jump_hold() -> bool:
 ## Must be implemented by child classes.
 func wants_sprint() -> bool:
 	return false
+
+
+func wants_dive() -> bool:
+	return false

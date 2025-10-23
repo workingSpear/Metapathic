@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dukooihowntnv"]
+[gd_scene load_steps=14 format=3 uid="uid://dukooihowntnv"]
 
 [ext_resource type="Script" uid="uid://vq2cnw7hk5h7" path="res://Scripts/Player/player.gd" id="1_8od7v"]
 [ext_resource type="Script" uid="uid://b4ia70r53dfff" path="res://Scripts/Player/player_camera_controller.gd" id="1_lc1oi"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://c3fmm64j3llva" path="res://Scripts/Player/States/move.gd" id="5_i3aeo"]
 [ext_resource type="Script" uid="uid://d0e8tvb8nlf5v" path="res://Scripts/Player/States/jump.gd" id="6_5wyu1"]
 [ext_resource type="Script" uid="uid://ceh74nd0nrk6a" path="res://Scripts/Player/States/fall.gd" id="7_0c07c"]
+[ext_resource type="Script" uid="uid://bv8tqsq3u5ugs" path="res://Scripts/Player/States/dive.gd" id="8_2cgwh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3qbn"]
 albedo_color = Color(0.4506483, 0.4506483, 0.45064825, 1)
@@ -26,7 +27,7 @@ radius = 0.07
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92873096, 12.330762, 0)
 light_energy = 16.0
-omni_range = 80.70843
+omni_range = 200.0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20631695, 0)
@@ -86,14 +87,21 @@ jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 rotation_speed = 8.0
 
-[node name="Jump" type="Node" parent="Player/MoveStateMachine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state")]
+[node name="Jump" type="Node" parent="Player/MoveStateMachine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state", "dive_state")]
 script = ExtResource("6_5wyu1")
 fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
 move_state = NodePath("../Move")
+dive_state = NodePath("../Dive")
 
-[node name="Fall" type="Node" parent="Player/MoveStateMachine" node_paths=PackedStringArray("idle_state", "move_state")]
+[node name="Fall" type="Node" parent="Player/MoveStateMachine" node_paths=PackedStringArray("idle_state", "move_state", "dive_state")]
 script = ExtResource("7_0c07c")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+dive_state = NodePath("../Dive")
+
+[node name="Dive" type="Node" parent="Player/MoveStateMachine" node_paths=PackedStringArray("idle_state", "move_state")]
+script = ExtResource("8_2cgwh")
 idle_state = NodePath("../Idle")
 move_state = NodePath("../Move")
 

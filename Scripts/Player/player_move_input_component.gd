@@ -30,5 +30,9 @@ func wants_sprint() -> bool:
 	return Input.is_action_pressed("sprint")
 
 
+func wants_dive() -> bool:
+	return Input.is_action_just_pressed("dive")
+
+
 func _on_camera_holder_set_cam_rotation(rotation: float) -> void:
 	camera_rotation = rotation

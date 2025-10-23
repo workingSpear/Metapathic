@@ -2,6 +2,7 @@ extends MoveState
 
 @export var idle_state: MoveState
 @export var move_state: MoveState
+@export var dive_state: MoveState
 
 
 func process_physics(delta: float) -> MoveState:
@@ -24,5 +25,8 @@ func process_physics(delta: float) -> MoveState:
 		if move_direction.is_zero_approx() and parent_obj.velocity.is_zero_approx():
 			return idle_state
 		return move_state
+
+	if get_dive():
+		return dive_state
 
 	return null
