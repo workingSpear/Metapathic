@@ -3,6 +3,17 @@ extends MoveState
 
 static var state_name: String = "Dive"
 
+var timer: Timer
+var gravity_multiplier: float
+
+
+func _init() -> void:
+	timer = Timer.new()
+	timer.autostart = false
+	timer.ignore_time_scale = false
+	timer.one_shot = true
+	add_child(timer)
+
 
 func enter() -> void:
 	super()
@@ -26,6 +37,10 @@ func enter() -> void:
 
 	parent_obj.velocity = init_direction * init_speed
 
+	timer.start(move_data.dive_time)
+	timer.timeout.connect(_on_timer_timeout)
+	gravity_multiplier = move_data.gravity_dive_multiplier
+
 
 func process_physics(delta: float) -> String:
 	var move_direction = get_rotated_move_direction()
@@ -40,7 +55,7 @@ func process_physics(delta: float) -> String:
 		move_data.acceleration * delta,
 	)
 
-	parent_obj.velocity.y -= gravity * move_data.gravity_dive_multiplier * delta
+	parent_obj.velocity.y -= gravity * gravity_multiplier * delta
 	parent_obj.move_and_slide()
 
 	if parent_obj.is_on_floor():
@@ -49,3 +64,7 @@ func process_physics(delta: float) -> String:
 		return Move.state_name
 
 	return ""
+
+
+func _on_timer_timeout() -> void:
+	gravity_multiplier = move_data.gravity_fall_multiplier

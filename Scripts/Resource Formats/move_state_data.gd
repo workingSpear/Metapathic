@@ -9,5 +9,6 @@ extends Resource
 @export var gravity_jump_multiplier: float
 @export var gravity_fall_multiplier: float
 @export var gravity_dive_multiplier: float
+@export var dive_time: float
 @export var dive_speed_min: float
 @export var dive_speed_boost: float
