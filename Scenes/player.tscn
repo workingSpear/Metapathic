@@ -1,0 +1,73 @@
+[gd_scene load_steps=13 format=3 uid="uid://c4w4pr86rhyji"]
+
+[ext_resource type="Script" uid="uid://vq2cnw7hk5h7" path="res://Scripts/Player/player.gd" id="1_f1ek2"]
+[ext_resource type="Script" uid="uid://b4ia70r53dfff" path="res://Scripts/Player/player_camera_controller.gd" id="2_tx1dd"]
+[ext_resource type="Script" uid="uid://b7admw81vwxsa" path="res://Scripts/States/move_state_machine.gd" id="3_gymyn"]
+[ext_resource type="Script" uid="uid://dwkuy5p60r3i5" path="res://Scripts/Player/States/idle.gd" id="4_pu2lt"]
+[ext_resource type="Script" uid="uid://c3fmm64j3llva" path="res://Scripts/Player/States/move.gd" id="5_ukyrk"]
+[ext_resource type="Script" uid="uid://d0e8tvb8nlf5v" path="res://Scripts/Player/States/jump.gd" id="6_7dp3o"]
+[ext_resource type="Script" uid="uid://ceh74nd0nrk6a" path="res://Scripts/Player/States/fall.gd" id="7_h4iuc"]
+[ext_resource type="Script" uid="uid://bv8tqsq3u5ugs" path="res://Scripts/Player/States/dive.gd" id="8_fd4e3"]
+[ext_resource type="Script" uid="uid://cb1vrs51wlmxm" path="res://Scripts/Player/player_move_input_component.gd" id="9_qqcod"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lc1oi"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8od7v"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lc1oi"]
+radius = 0.07
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_f1ek2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_lc1oi")
+
+[node name="MeshHolder" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshHolder"]
+mesh = SubResource("CapsuleMesh_8od7v")
+
+[node name="PlayerCameraHolder" type="Node3D" parent="." node_paths=PackedStringArray("yaw_node", "pitch_node", "camera")]
+script = ExtResource("2_tx1dd")
+yaw_node = NodePath("CamYaw")
+pitch_node = NodePath("CamYaw/CamPitch")
+camera = NodePath("CamYaw/CamPitch/SpringArm3D/Camera3D")
+
+[node name="CamYaw" type="Node3D" parent="PlayerCameraHolder"]
+
+[node name="CamPitch" type="Node3D" parent="PlayerCameraHolder/CamYaw"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="PlayerCameraHolder/CamYaw/CamPitch"]
+shape = SubResource("SphereShape3D_lc1oi")
+spring_length = 9.0
+
+[node name="Camera3D" type="Camera3D" parent="PlayerCameraHolder/CamYaw/CamPitch/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4478154)
+
+[node name="MoveStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_gymyn")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MoveStateMachine"]
+script = ExtResource("4_pu2lt")
+
+[node name="Move" type="Node" parent="MoveStateMachine"]
+script = ExtResource("5_ukyrk")
+rotation_speed = 8.0
+
+[node name="Jump" type="Node" parent="MoveStateMachine"]
+script = ExtResource("6_7dp3o")
+
+[node name="Fall" type="Node" parent="MoveStateMachine"]
+script = ExtResource("7_h4iuc")
+
+[node name="Dive" type="Node" parent="MoveStateMachine"]
+script = ExtResource("8_fd4e3")
+
+[node name="PlayerMoveInputComponent" type="Node" parent="."]
+script = ExtResource("9_qqcod")
+
+[connection signal="set_cam_rotation" from="PlayerCameraHolder" to="MoveStateMachine/Move" method="_on_camera_holder_set_cam_rotation"]
+[connection signal="set_cam_rotation" from="PlayerCameraHolder" to="MoveStateMachine/Jump" method="_on_camera_holder_set_cam_rotation"]
+[connection signal="set_cam_rotation" from="PlayerCameraHolder" to="MoveStateMachine/Fall" method="_on_camera_holder_set_cam_rotation"]
