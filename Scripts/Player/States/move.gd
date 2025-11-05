@@ -1,12 +1,12 @@
+class_name Move
 extends MoveState
 
-@export var idle_state: MoveState
-@export var jump_state: MoveState
-@export var fall_state: MoveState
+static var state_name: String = "Move"
+
 @export var rotation_speed: float
 
 
-func process_physics(delta: float) -> MoveState:
+func process_physics(delta: float) -> String:
 	var move_direction = get_rotated_move_direction()
 
 	var move_speed = get_move_speed()
@@ -26,12 +26,12 @@ func process_physics(delta: float) -> MoveState:
 	mesh_holder.rotation.y = lerp_angle(mesh_holder.rotation.y, target_rot, rotation_speed)
 
 	if move_direction.is_zero_approx() and parent_obj.velocity.is_zero_approx():
-		return idle_state
+		return Idle.state_name
 
 	if !parent_obj.is_on_floor():
-		return fall_state
+		return Fall.state_name
 
 	if get_jump() and parent_obj.is_on_floor():
-		return jump_state
+		return Jump.state_name
 
-	return null
+	return ""

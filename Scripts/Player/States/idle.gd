@@ -1,8 +1,7 @@
+class_name Idle
 extends MoveState
 
-@export var move_state: MoveState
-@export var fall_state: MoveState
-@export var jump_state: MoveState
+static var state_name: String = "Idle"
 
 
 func enter():
@@ -11,19 +10,19 @@ func enter():
 	parent_obj.velocity.z = 0
 
 
-func process_input(_event: InputEvent) -> MoveState:
+func process_input(_event: InputEvent) -> String:
 	if get_jump() and parent_obj.is_on_floor():
-		return jump_state
+		return Jump.state_name
 	if not get_move_input().is_zero_approx():
-		return move_state
-	return null
+		return Move.state_name
+	return ""
 
 
-func process_physics(delta: float) -> MoveState:
+func process_physics(delta: float) -> String:
 	## TODO: do movement things here
 	parent_obj.velocity.y -= gravity * delta
 	parent_obj.move_and_slide()
 
 	if !parent_obj.is_on_floor():
-		return fall_state
-	return null
+		return Fall.state_name
+	return ""

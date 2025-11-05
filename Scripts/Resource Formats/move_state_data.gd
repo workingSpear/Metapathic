@@ -5,6 +5,7 @@ extends Resource
 @export var move_speed_sprint: float
 @export var acceleration: float
 @export var camera_fov: float
+@export var jump_force: float
 @export var gravity_jump_multiplier: float
 @export var gravity_fall_multiplier: float
 @export var gravity_dive_multiplier: float

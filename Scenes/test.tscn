@@ -74,36 +74,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4478154)
 script = ExtResource("3_35xla")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="Player/MoveStateMachine" node_paths=PackedStringArray("move_state", "fall_state", "jump_state")]
+[node name="Idle" type="Node" parent="Player/MoveStateMachine"]
 script = ExtResource("3_ys1qc")
-move_state = NodePath("../Move")
-fall_state = NodePath("../Fall")
-jump_state = NodePath("../Jump")
 
-[node name="Move" type="Node" parent="Player/MoveStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "fall_state")]
+[node name="Move" type="Node" parent="Player/MoveStateMachine"]
 script = ExtResource("5_i3aeo")
-idle_state = NodePath("../Idle")
-jump_state = NodePath("../Jump")
-fall_state = NodePath("../Fall")
 rotation_speed = 8.0
 
-[node name="Jump" type="Node" parent="Player/MoveStateMachine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state", "dive_state")]
+[node name="Jump" type="Node" parent="Player/MoveStateMachine"]
 script = ExtResource("6_5wyu1")
-fall_state = NodePath("../Fall")
-idle_state = NodePath("../Idle")
-move_state = NodePath("../Move")
-dive_state = NodePath("../Dive")
 
-[node name="Fall" type="Node" parent="Player/MoveStateMachine" node_paths=PackedStringArray("idle_state", "move_state", "dive_state")]
+[node name="Fall" type="Node" parent="Player/MoveStateMachine"]
 script = ExtResource("7_0c07c")
-idle_state = NodePath("../Idle")
-move_state = NodePath("../Move")
-dive_state = NodePath("../Dive")
 
-[node name="Dive" type="Node" parent="Player/MoveStateMachine" node_paths=PackedStringArray("idle_state", "move_state")]
+[node name="Dive" type="Node" parent="Player/MoveStateMachine"]
 script = ExtResource("8_2cgwh")
-idle_state = NodePath("../Idle")
-move_state = NodePath("../Move")
 
 [node name="PlayerMoveInputComponent" type="Node" parent="Player"]
 script = ExtResource("3_qc4db")

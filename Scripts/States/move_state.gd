@@ -16,16 +16,16 @@ func exit() -> void:
 	pass
 
 
-func process_input(_event: InputEvent) -> MoveState:
-	return null
+func process_input(_event: InputEvent) -> String:
+	return ""
 
 
-func process_frame(_delta: float) -> MoveState:
-	return null
+func process_frame(_delta: float) -> String:
+	return ""
 
 
-func process_physics(_delta: float) -> MoveState:
-	return null
+func process_physics(_delta: float) -> String:
+	return ""
 
 
 func get_move_input() -> Vector3:

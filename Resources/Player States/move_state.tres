@@ -8,6 +8,7 @@ move_speed = 30.0
 move_speed_sprint = 30.0
 acceleration = 100.0
 camera_fov = 75.0
+jump_force = 20.0
 gravity_jump_multiplier = 0.75
 gravity_fall_multiplier = 1.0
 gravity_dive_multiplier = 1.0

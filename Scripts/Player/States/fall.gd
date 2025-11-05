@@ -1,11 +1,10 @@
+class_name Fall
 extends MoveState
 
-@export var idle_state: MoveState
-@export var move_state: MoveState
-@export var dive_state: MoveState
+static var state_name: String = "Fall"
 
 
-func process_physics(delta: float) -> MoveState:
+func process_physics(delta: float) -> String:
 	var move_direction = get_rotated_move_direction()
 
 	var move_speed = get_move_speed()
@@ -23,10 +22,10 @@ func process_physics(delta: float) -> MoveState:
 
 	if parent_obj.is_on_floor():
 		if move_direction.is_zero_approx() and parent_obj.velocity.is_zero_approx():
-			return idle_state
-		return move_state
+			return Idle.state_name
+		return Move.state_name
 
 	if get_dive():
-		return dive_state
+		return Dive.state_name
 
-	return null
+	return ""

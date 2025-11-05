@@ -1,7 +1,7 @@
+class_name Dive
 extends MoveState
 
-@export var idle_state: MoveState
-@export var move_state: MoveState
+static var state_name: String = "Dive"
 
 
 func enter() -> void:
@@ -27,7 +27,7 @@ func enter() -> void:
 	parent_obj.velocity = init_direction * init_speed
 
 
-func process_physics(delta: float) -> MoveState:
+func process_physics(delta: float) -> String:
 	var move_direction = get_rotated_move_direction()
 
 	var move_speed = get_move_speed()
@@ -45,7 +45,7 @@ func process_physics(delta: float) -> MoveState:
 
 	if parent_obj.is_on_floor():
 		if move_direction.is_zero_approx() and parent_obj.velocity.is_zero_approx():
-			return idle_state
-		return move_state
+			return Idle.state_name
+		return Move.state_name
 
-	return null
+	return ""

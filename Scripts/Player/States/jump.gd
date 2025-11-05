@@ -1,18 +1,15 @@
+class_name Jump
 extends MoveState
 
-@export var fall_state: MoveState
-@export var idle_state: MoveState
-@export var move_state: MoveState
-@export var dive_state: MoveState
-@export var jump_force: float = 20.0
+static var state_name: String = "Jump"
 
 
 func enter() -> void:
 	super()
-	parent_obj.velocity.y = jump_force
+	parent_obj.velocity.y = move_data.jump_force
 
 
-func process_physics(delta: float) -> MoveState:
+func process_physics(delta: float) -> String:
 	var move_direction = get_rotated_move_direction()
 
 	var move_speed = get_move_speed()
@@ -30,13 +27,13 @@ func process_physics(delta: float) -> MoveState:
 
 	if parent_obj.is_on_floor():
 		if move_direction != Vector3.ZERO:
-			return move_state
-		return idle_state
+			return Move.state_name
+		return Idle.state_name
 
 	if not get_jump_hold() or parent_obj.velocity.y < 0:
-		return fall_state
+		return Fall.state_name
 
 	if get_dive():
-		return dive_state
+		return Dive.state_name
 
-	return null
+	return ""
