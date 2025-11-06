@@ -41,6 +41,9 @@ func init(
 	print(state_dictionary.keys())
 
 	# Initialize to the default state.
+	# If the starting state is null, assign it to the first child MoveState.
+	if starting_state == null:
+		starting_state = get_child(0)
 	change_state(starting_state.name)
 
 

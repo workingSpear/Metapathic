@@ -1,11 +1,11 @@
 class_name Player
 extends CharacterBody3D
 
-var player_move_data: MoveStateData = preload("res://Resources/Player States/move_state.tres")
+@export var player_move_data: MoveStateData = preload("res://Resources/Player States/move_state.tres")
 
 @onready var move_state_machine: MoveStateMachine = $MoveStateMachine
-@onready var player_move_input_component: PlayerMoveInputComponent = $PlayerMoveInputComponent
 @onready var mesh_holder = $MeshHolder
+@onready var player_move_input_component: PlayerMoveInputComponent = $PlayerMoveInputComponent
 @onready var camera_holder: PlayerCameraController = $PlayerCameraHolder
 
 
