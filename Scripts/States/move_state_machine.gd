@@ -44,6 +44,30 @@ func init(
 	change_state(starting_state.name)
 
 
+## Add a MoveState component to the MoveStateMachine.
+## Updates the state dictionary with the reference to the new MoveState.
+## Use this method to dynamically add or set MoveStates, for example when the
+## Player wants to add a new movement ability.
+func add_move_state(state_node: MoveState) -> void:
+	add_child(state_node)
+	state_dictionary.set(state_node.get_state_name(), state_node)
+	print(owner.name + ": Adding MoveState " + state_node.get_state_name() + ":")
+	print(state_dictionary.keys())
+
+
+## Removes a MoveState from the MoveStateMachine via its name.
+## Removes the MoveState from the state dictionary.
+## Frees the corresponding MoveState node.
+## Use this method to dynamically remove MoveStates, for example when the
+## Player wants to remove a movement ability.
+func remove_move_state(state_name: String) -> void:
+	var state: MoveState = state_dictionary.get(state_name)
+	if state != null:
+		state.queue_free()
+
+	state_dictionary.erase(state_name)
+
+
 ## Change to the new state by first calling any exit logic on the current state.
 func change_state(new_state_name: String) -> void:
 	var new_state: MoveState = state_dictionary.get(new_state_name)
@@ -59,20 +83,24 @@ func change_state(new_state_name: String) -> void:
 	current_state.enter()
 
 
-## Pass through functions for the Player to call,
-## handling state changes as needed.
+## Calls the current state's process physics method.
+## If the process method returns a valid state, transitions to the new state.
 func process_physics(delta: float) -> void:
 	var new_state_name: String = current_state.process_physics(delta)
 	if new_state_name.length() != 0:
 		change_state(new_state_name)
 
 
+## Calls the current state's process input method.
+## If the process method returns a valid state, transitions to the new state.
 func process_input(event: InputEvent) -> void:
 	var new_state_name: String = current_state.process_input(event)
 	if new_state_name.length() != 0:
 		change_state(new_state_name)
 
 
+## Calls the current state's process frame method.
+## If the process method returns a valid state, transitions to the new state.
 func process_frame(delta: float) -> void:
 	var new_state_name: String = current_state.process_frame(delta)
 	if new_state_name.length() != 0:
