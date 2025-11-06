@@ -1,19 +1,26 @@
+class_name MoveStateMachine
+extends Node
 ## A Node that manages move states for a CharacterBody3D.
 ##
 ## MoveStateMachine is responsible for holding MoveState nodes, running the
 ## correct physics, input, and frame processes, and transitioning between
 ## MoveStates.
 ##
-## To use MoveStateMachine, a parent Node must initialize it by injecting the
-## necessary components. Then, the parent Characterbody3D can be controlled by
-## calling the MoveStateMachine's process functions in the respective parent
-## processes.
-class_name MoveStateMachine
-extends Node
+## MoveStateMachine must be initialized by a parent, which injects the
+## necessary components: a CharacterBody3D to move, a Node3D that holds the
+## mesh, a MoveInputComponent that passes inputs to the MoveStates, and a
+## MoveStateData resource that holds movement stats.
+##
+## The Characterbody3D can be controlled by calling the MoveStateMachine's
+## process functions in the respective parent processes.
 
+## The starting MoveState. If not assigned in the inspector, this defaults to
+## the first child MoveState on the MoveStateMachine.
 @export var starting_state: MoveState
 
+## The current MoveState.
 var current_state: MoveState
+## A Dictionary that maps MoveState names to the corresponding MoveState node.
 var state_dictionary: Dictionary
 
 
