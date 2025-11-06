@@ -4,6 +4,10 @@ extends MoveState
 static var state_name: String = "Fall"
 
 
+func get_state_name() -> String:
+	return state_name
+
+
 func process_physics(delta: float) -> String:
 	var move_direction = get_rotated_move_direction()
 

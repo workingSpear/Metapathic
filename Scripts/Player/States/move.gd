@@ -6,6 +6,10 @@ static var state_name: String = "Move"
 @export var rotation_speed: float
 
 
+func get_state_name() -> String:
+	return state_name
+
+
 func process_physics(delta: float) -> String:
 	var move_direction = get_rotated_move_direction()
 

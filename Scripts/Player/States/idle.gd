@@ -4,6 +4,10 @@ extends MoveState
 static var state_name: String = "Idle"
 
 
+func get_state_name() -> String:
+	return state_name
+
+
 func enter():
 	super()
 	parent_obj.velocity.x = 0

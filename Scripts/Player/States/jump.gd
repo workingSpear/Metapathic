@@ -4,6 +4,10 @@ extends MoveState
 static var state_name: String = "Jump"
 
 
+func get_state_name() -> String:
+	return state_name
+
+
 func enter() -> void:
 	super()
 	parent_obj.velocity.y = move_data.jump_force

@@ -7,11 +7,16 @@ var timer: Timer
 var gravity_multiplier: float
 
 
+func get_state_name() -> String:
+	return state_name
+
+
 func _init() -> void:
 	timer = Timer.new()
 	timer.autostart = false
 	timer.ignore_time_scale = false
 	timer.one_shot = true
+	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
 
 
@@ -38,7 +43,6 @@ func enter() -> void:
 	parent_obj.velocity = init_direction * init_speed
 
 	timer.start(move_data.dive_time)
-	timer.timeout.connect(_on_timer_timeout)
 	gravity_multiplier = move_data.gravity_dive_multiplier
 
 

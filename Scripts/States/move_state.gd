@@ -8,6 +8,10 @@ var move_component: MoveInputComponent
 var move_data: MoveStateData
 
 
+func get_state_name() -> String:
+	return ""
+
+
 func enter() -> void:
 	pass
 
