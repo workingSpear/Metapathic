@@ -1,10 +1,9 @@
 class_name MoveStateMachine
 extends Node
-## A Node that manages move states for a CharacterBody3D.
+## A Node that manages MoveStates for a CharacterBody3D.
 ##
 ## MoveStateMachine is responsible for holding MoveState nodes, running the
-## correct physics, input, and frame processes, and transitioning between
-## MoveStates.
+## correct frame/physics/input processes, and transitioning between MoveStates.
 ##
 ## MoveStateMachine must be initialized by a parent, which injects the
 ## necessary components: a CharacterBody3D to move, a Node3D that holds the
@@ -13,6 +12,9 @@ extends Node
 ##
 ## The Characterbody3D can be controlled by calling the MoveStateMachine's
 ## process functions in the respective parent processes.
+##
+## Each MoveState method must return a String that tells the MoveStateMachine
+## the next state. If the String is empty, the current state will be kept.
 
 ## The starting MoveState. If not assigned in the inspector, this defaults to
 ## the first child MoveState on the MoveStateMachine.
@@ -93,6 +95,14 @@ func change_state(new_state_name: String) -> void:
 	current_state.enter()
 
 
+## Calls the current state's process frame method.
+## If the process method returns a valid state, transitions to the new state.
+func process_frame(delta: float) -> void:
+	var new_state_name: String = current_state.process_frame(delta)
+	if new_state_name.length() != 0:
+		change_state(new_state_name)
+
+
 ## Calls the current state's process physics method.
 ## If the process method returns a valid state, transitions to the new state.
 func process_physics(delta: float) -> void:
@@ -105,13 +115,5 @@ func process_physics(delta: float) -> void:
 ## If the process method returns a valid state, transitions to the new state.
 func process_input(event: InputEvent) -> void:
 	var new_state_name: String = current_state.process_input(event)
-	if new_state_name.length() != 0:
-		change_state(new_state_name)
-
-
-## Calls the current state's process frame method.
-## If the process method returns a valid state, transitions to the new state.
-func process_frame(delta: float) -> void:
-	var new_state_name: String = current_state.process_frame(delta)
 	if new_state_name.length() != 0:
 		change_state(new_state_name)
