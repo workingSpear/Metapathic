@@ -78,10 +78,6 @@ func get_rotated_move_direction() -> Vector3:
 	return get_move_input().rotated(Vector3.UP, get_move_rotation())
 
 
-func get_move_speed() -> float:
-	return move_data.move_speed_sprint if get_sprint() else move_data.move_speed
-
-
 func get_jump() -> bool:
 	return move_component.wants_jump()
 

@@ -7,10 +7,6 @@ var timer: Timer
 var gravity_multiplier: float
 
 
-func get_state_name() -> String:
-	return state_name
-
-
 func _init() -> void:
 	timer = Timer.new()
 	timer.autostart = false
@@ -18,6 +14,10 @@ func _init() -> void:
 	timer.one_shot = true
 	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
+
+
+func get_state_name() -> String:
+	return state_name
 
 
 func enter() -> void:
@@ -43,7 +43,7 @@ func enter() -> void:
 	parent_obj.velocity = init_direction * init_speed
 
 	timer.start(move_data.dive_time)
-	gravity_multiplier = move_data.gravity_dive_multiplier
+	gravity_multiplier = move_data.dive_gravity_multiplier
 
 
 func process_physics(delta: float) -> String:
@@ -56,7 +56,7 @@ func process_physics(delta: float) -> String:
 
 	parent_obj.velocity = parent_obj.velocity.move_toward(
 		target_move_velocity,
-		move_data.acceleration * delta,
+		move_data.dive_move_acceleration * delta,
 	)
 
 	parent_obj.velocity.y -= gravity * gravity_multiplier * delta
@@ -70,5 +70,9 @@ func process_physics(delta: float) -> String:
 	return ""
 
 
+func get_move_speed() -> float:
+	return move_data.dive_move_speed_sprint if get_sprint() else move_data.dive_move_speed
+
+
 func _on_timer_timeout() -> void:
-	gravity_multiplier = move_data.gravity_fall_multiplier
+	gravity_multiplier = move_data.fall_gravity_multiplier

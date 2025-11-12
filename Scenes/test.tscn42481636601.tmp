@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dukooihowntnv"]
+
+[ext_resource type="PackedScene" uid="uid://c4w4pr86rhyji" path="res://Scenes/player.tscn" id="1_lc1oi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3qbn"]
+albedo_color = Color(0.4506483, 0.4506483, 0.45064825, 1)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[node name="Test" type="Node3D"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92873096, 12.330762, 0)
+light_energy = 16.0
+omni_range = 200.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20631695, 0)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(209.59863, 1, 210.5498)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0584173, 2.6353216, 0)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(3.2398553, 4.2610006, 10.743164)
+
+[node name="Player" parent="." instance=ExtResource("1_lc1oi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0508358, 0)

@@ -10,7 +10,7 @@ func get_state_name() -> String:
 
 func enter() -> void:
 	super()
-	parent_obj.velocity.y = move_data.jump_force
+	parent_obj.velocity.y = move_data.jump_vertical_velocity
 
 
 func process_physics(delta: float) -> String:
@@ -23,10 +23,10 @@ func process_physics(delta: float) -> String:
 
 	parent_obj.velocity = parent_obj.velocity.move_toward(
 		target_move_velocity,
-		move_data.acceleration * delta,
+		move_data.jump_move_acceleration * delta,
 	)
 
-	parent_obj.velocity.y -= gravity * move_data.gravity_jump_multiplier * delta
+	parent_obj.velocity.y -= gravity * move_data.jump_gravity_multiplier * delta
 	parent_obj.move_and_slide()
 
 	if parent_obj.is_on_floor():
@@ -41,3 +41,7 @@ func process_physics(delta: float) -> String:
 		return Dive.state_name
 
 	return ""
+
+
+func get_move_speed() -> float:
+	return move_data.jump_move_speed_sprint if get_sprint() else move_data.jump_move_speed

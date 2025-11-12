@@ -23,8 +23,7 @@ func process_input(_event: InputEvent) -> String:
 
 
 func process_physics(delta: float) -> String:
-	## TODO: do movement things here
-	parent_obj.velocity.y -= gravity * delta
+	parent_obj.velocity.y -= gravity * move_data.idle_gravity_multiplier * delta
 	parent_obj.move_and_slide()
 
 	if !parent_obj.is_on_floor():

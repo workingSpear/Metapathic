@@ -4,14 +4,24 @@
 
 [resource]
 script = ExtResource("1_otm2d")
+idle_gravity_multiplier = 1.0
 move_speed = 30.0
 move_speed_sprint = 30.0
-acceleration = 100.0
-camera_fov = 75.0
-jump_force = 20.0
-gravity_jump_multiplier = 0.75
-gravity_fall_multiplier = 1.0
-gravity_dive_multiplier = 0.25
+move_acceleration = 200.0
+move_gravity_multiplier = 1.0
+jump_move_speed = 30.0
+jump_move_speed_sprint = 30.0
+jump_move_acceleration = 150.0
+jump_vertical_velocity = 20.0
+jump_gravity_multiplier = 0.75
+fall_move_speed = 30.0
+fall_move_speed_sprint = 30.0
+fall_move_acceleration = 150.0
+fall_gravity_multiplier = 1.0
+dive_move_speed = 40.0
+dive_move_speed_sprint = 40.0
+dive_move_acceleration = 50.0
+dive_gravity_multiplier = 0.25
 dive_time = 0.2
 dive_speed_min = 30.0
 dive_speed_boost = 20.0

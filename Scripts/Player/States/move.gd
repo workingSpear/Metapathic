@@ -20,10 +20,10 @@ func process_physics(delta: float) -> String:
 
 	parent_obj.velocity = parent_obj.velocity.move_toward(
 		target_move_velocity,
-		move_data.acceleration * delta,
+		move_data.move_acceleration * delta,
 	)
 
-	parent_obj.velocity.y -= gravity * move_data.gravity_fall_multiplier * delta
+	parent_obj.velocity.y -= gravity * move_data.move_gravity_multiplier * delta
 	parent_obj.move_and_slide()
 
 	var target_rot = atan2(move_direction.x, move_direction.z) - parent_obj.rotation.y
@@ -39,3 +39,7 @@ func process_physics(delta: float) -> String:
 		return Jump.state_name
 
 	return ""
+
+
+func get_move_speed() -> float:
+	return move_data.move_speed_sprint if get_sprint() else move_data.move_speed
