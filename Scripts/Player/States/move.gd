@@ -11,7 +11,8 @@ func get_state_name() -> String:
 
 
 func process_physics(delta: float) -> String:
-	var move_direction = get_rotated_move_direction()
+	var move_direction = move_component.get_input_move_direction()
+	move_direction = move_direction.rotated(Vector3.UP, move_component.get_input_move_rotation())
 
 	var move_speed = get_move_speed()
 
@@ -35,11 +36,11 @@ func process_physics(delta: float) -> String:
 	if !parent_obj.is_on_floor():
 		return Fall.state_name
 
-	if get_jump() and parent_obj.is_on_floor():
+	if move_component.get_input_jump_press() and parent_obj.is_on_floor():
 		return Jump.state_name
 
 	return ""
 
 
 func get_move_speed() -> float:
-	return move_data.move_speed_sprint if get_sprint() else move_data.move_speed
+	return move_data.move_speed_sprint if move_component.get_input_sprint_hold() else move_data.move_speed

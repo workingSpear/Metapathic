@@ -64,31 +64,3 @@ func process_physics(_delta: float) -> String:
 ## to transition to a MoveState with the corresponding name.
 func process_input(_event: InputEvent) -> String:
 	return ""
-
-
-func get_move_input() -> Vector3:
-	return move_component.get_move_direction().normalized()
-
-
-func get_move_rotation() -> float:
-	return move_component.get_move_rotation()
-
-
-func get_rotated_move_direction() -> Vector3:
-	return get_move_input().rotated(Vector3.UP, get_move_rotation())
-
-
-func get_jump() -> bool:
-	return move_component.wants_jump()
-
-
-func get_jump_hold() -> bool:
-	return move_component.wants_jump_hold()
-
-
-func get_sprint() -> bool:
-	return move_component.wants_sprint()
-
-
-func get_dive() -> bool:
-	return move_component.wants_dive()

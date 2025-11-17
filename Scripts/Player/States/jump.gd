@@ -14,7 +14,8 @@ func enter() -> void:
 
 
 func process_physics(delta: float) -> String:
-	var move_direction = get_rotated_move_direction()
+	var move_direction = move_component.get_input_move_direction()
+	move_direction = move_direction.rotated(Vector3.UP, move_component.get_input_move_rotation())
 
 	var move_speed = get_move_speed()
 
@@ -34,14 +35,14 @@ func process_physics(delta: float) -> String:
 			return Move.state_name
 		return Idle.state_name
 
-	if not get_jump_hold() or parent_obj.velocity.y < 0:
+	if not move_component.get_input_jump_hold() or parent_obj.velocity.y < 0:
 		return Fall.state_name
 
-	if get_dive():
+	if move_component.get_input_dive_press():
 		return Dive.state_name
 
 	return ""
 
 
 func get_move_speed() -> float:
-	return move_data.jump_move_speed_sprint if get_sprint() else move_data.jump_move_speed
+	return move_data.jump_move_speed_sprint if move_component.get_input_sprint_hold() else move_data.jump_move_speed

@@ -24,11 +24,12 @@ func enter() -> void:
 	super()
 
 	# Get the horizontal move direction at the start of the dive
-	var init_direction: Vector3 = get_rotated_move_direction()
+	var init_direction = move_component.get_input_move_direction()
+	init_direction = init_direction.rotated(Vector3.UP, move_component.get_input_move_rotation())
 	# If the player is not moving, manually set the initial direction
 	# as the local forward direction.
 	if init_direction.is_zero_approx():
-		init_direction = Vector3.FORWARD.rotated(Vector3.UP, get_move_rotation())
+		init_direction = Vector3.FORWARD.rotated(Vector3.UP, move_component.get_input_move_rotation())
 	init_direction.y = 0.0
 	init_direction = init_direction.normalized()
 
@@ -47,7 +48,8 @@ func enter() -> void:
 
 
 func process_physics(delta: float) -> String:
-	var move_direction = get_rotated_move_direction()
+	var move_direction = move_component.get_input_move_direction()
+	move_direction = move_direction.rotated(Vector3.UP, move_component.get_input_move_rotation())
 
 	var move_speed = get_move_speed()
 
@@ -71,7 +73,7 @@ func process_physics(delta: float) -> String:
 
 
 func get_move_speed() -> float:
-	return move_data.dive_move_speed_sprint if get_sprint() else move_data.dive_move_speed
+	return move_data.dive_move_speed_sprint if move_component.get_input_sprint_hold() else move_data.dive_move_speed
 
 
 func _on_timer_timeout() -> void:

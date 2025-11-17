@@ -15,9 +15,9 @@ func enter():
 
 
 func process_input(_event: InputEvent) -> String:
-	if get_jump() and parent_obj.is_on_floor():
+	if move_component.get_input_jump_press() and parent_obj.is_on_floor():
 		return Jump.state_name
-	if not get_move_input().is_zero_approx():
+	if not move_component.get_input_move_direction().is_zero_approx():
 		return Move.state_name
 	return ""
 
