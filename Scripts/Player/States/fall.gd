@@ -26,6 +26,8 @@ func process_physics(delta: float) -> String:
 	parent_obj.move_and_slide()
 
 	if parent_obj.is_on_floor():
+		if move_component.get_input_slide_hold():
+			return Slide.state_name
 		if move_direction.is_zero_approx() and parent_obj.velocity.is_zero_approx():
 			return Idle.state_name
 		return Move.state_name

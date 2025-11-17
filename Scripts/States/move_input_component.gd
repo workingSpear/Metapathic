@@ -13,7 +13,7 @@ extends Node
 ## an enemy might receive inputs from pathfinding.
 
 
-## Returns a normalized Vector3 indicating the character's target move
+## Returns a Vector3 indicating the character's target move
 ## direction, or Vector3.ZERO if there is no input.
 func get_input_move_direction() -> Vector3:
 	return Vector3.ZERO
@@ -39,5 +39,11 @@ func get_input_sprint_hold() -> bool:
 	return false
 
 
+## Returns a boolean indicating if the character wants to dive.
 func get_input_dive_press() -> bool:
+	return false
+
+
+## Returns a boolean indicating if the character is holding slide.
+func get_input_slide_hold() -> bool:
 	return false

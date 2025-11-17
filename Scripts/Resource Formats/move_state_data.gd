@@ -27,3 +27,10 @@ extends Resource
 @export var dive_time: float
 @export var dive_speed_min: float
 @export var dive_speed_boost: float
+@export_group("Slide State", "slide_")
+@export var slide_move_speed_decay: float
+@export var slide_gravity_multiplier: float
+@export var slide_speed_min: float
+@export var slide_speed_boost: float
+@export var slide_jump_speed_boost: float
+@export_range(0, 1, 0.01) var slide_slerp_rate: float

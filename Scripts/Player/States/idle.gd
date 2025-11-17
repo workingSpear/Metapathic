@@ -28,4 +28,8 @@ func process_physics(delta: float) -> String:
 
 	if !parent_obj.is_on_floor():
 		return Fall.state_name
+
+	if move_component.get_input_slide_hold():
+		return Slide.state_name
+
 	return ""

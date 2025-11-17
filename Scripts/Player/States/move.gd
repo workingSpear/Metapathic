@@ -3,7 +3,7 @@ extends MoveState
 
 static var state_name: String = "Move"
 
-@export var rotation_speed: float
+@export var mesh_rotation_speed: float
 
 
 func get_state_name() -> String:
@@ -28,7 +28,7 @@ func process_physics(delta: float) -> String:
 	parent_obj.move_and_slide()
 
 	var target_rot = atan2(move_direction.x, move_direction.z) - parent_obj.rotation.y
-	mesh_holder.rotation.y = lerp_angle(mesh_holder.rotation.y, target_rot, rotation_speed)
+	mesh_holder.rotation.y = lerp_angle(mesh_holder.rotation.y, target_rot, mesh_rotation_speed)
 
 	if move_direction.is_zero_approx() and parent_obj.velocity.is_zero_approx():
 		return Idle.state_name
@@ -38,6 +38,9 @@ func process_physics(delta: float) -> String:
 
 	if move_component.get_input_jump_press() and parent_obj.is_on_floor():
 		return Jump.state_name
+
+	if move_component.get_input_slide_hold():
+		return Slide.state_name
 
 	return ""
 

@@ -31,6 +31,8 @@ func process_physics(delta: float) -> String:
 	parent_obj.move_and_slide()
 
 	if parent_obj.is_on_floor():
+		if move_component.get_input_slide_hold():
+			return Slide.state_name
 		if move_direction != Vector3.ZERO:
 			return Move.state_name
 		return Idle.state_name

@@ -34,5 +34,9 @@ func get_input_dive_press() -> bool:
 	return Input.is_action_just_pressed("dive")
 
 
+func get_input_slide_hold() -> bool:
+	return Input.is_action_pressed("slide")
+
+
 func _on_camera_holder_set_cam_rotation(rotation: float) -> void:
 	camera_rotation = rotation

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4w4pr86rhyji"]
+[gd_scene load_steps=14 format=3 uid="uid://c4w4pr86rhyji"]
 
 [ext_resource type="Script" uid="uid://vq2cnw7hk5h7" path="res://Scripts/Player/player.gd" id="1_f1ek2"]
 [ext_resource type="Script" uid="uid://b4ia70r53dfff" path="res://Scripts/Player/player_camera_controller.gd" id="2_tx1dd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://ceh74nd0nrk6a" path="res://Scripts/Player/States/fall.gd" id="7_h4iuc"]
 [ext_resource type="Script" uid="uid://bv8tqsq3u5ugs" path="res://Scripts/Player/States/dive.gd" id="8_fd4e3"]
 [ext_resource type="Script" uid="uid://cb1vrs51wlmxm" path="res://Scripts/Player/player_move_input_component.gd" id="9_qqcod"]
+[ext_resource type="Script" uid="uid://c1hcfet7aapu" path="res://Scripts/Player/States/slide.gd" id="9_tx1dd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lc1oi"]
 
@@ -54,7 +55,6 @@ script = ExtResource("4_pu2lt")
 
 [node name="Move" type="Node" parent="MoveStateMachine"]
 script = ExtResource("5_ukyrk")
-rotation_speed = 8.0
 
 [node name="Jump" type="Node" parent="MoveStateMachine"]
 script = ExtResource("6_7dp3o")
@@ -64,6 +64,10 @@ script = ExtResource("7_h4iuc")
 
 [node name="Dive" type="Node" parent="MoveStateMachine"]
 script = ExtResource("8_fd4e3")
+
+[node name="Slide" type="Node" parent="MoveStateMachine"]
+script = ExtResource("9_tx1dd")
+metadata/_custom_type_script = "uid://c1hcfet7aapu"
 
 [node name="PlayerMoveInputComponent" type="Node" parent="."]
 script = ExtResource("9_qqcod")
