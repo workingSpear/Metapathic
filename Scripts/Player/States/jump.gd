@@ -10,7 +10,7 @@ func get_state_name() -> String:
 
 func enter() -> void:
 	super()
-	parent_obj.velocity.y = move_data.jump_vertical_velocity
+	parent_obj.velocity.y = max(parent_obj.velocity.y, 0.0) + move_data.jump_vertical_velocity
 
 
 func process_physics(delta: float) -> String:

@@ -9,10 +9,10 @@ func get_state_name() -> String:
 
 
 func process_physics(delta: float) -> String:
-	var move_direction = move_component.get_input_move_direction()
+	var move_direction: Vector3 = move_component.get_input_move_direction()
 	move_direction = move_direction.rotated(Vector3.UP, move_component.get_input_move_rotation())
 
-	var move_speed = get_move_speed()
+	var move_speed: float = get_move_speed()
 
 	var target_move_velocity: Vector3 = move_direction * move_speed
 	target_move_velocity.y = parent_obj.velocity.y
@@ -23,6 +23,15 @@ func process_physics(delta: float) -> String:
 	)
 
 	parent_obj.velocity.y -= gravity * move_data.fall_gravity_multiplier * delta
+	# Wall jump
+	if parent_obj.is_on_wall_only():
+		if move_component.get_input_jump_press():
+			var WALL_JUMP_VERTICAL_VELOCITY: float = move_data.jump_vertical_velocity * 0.9
+			var WALL_JUMP_NORMAL_MAGNITUDE: float = 50.0
+			var wall_jump_vector: Vector3 = parent_obj.get_wall_normal() * WALL_JUMP_NORMAL_MAGNITUDE
+			parent_obj.velocity.y = max(parent_obj.velocity.y, 0.0) + WALL_JUMP_VERTICAL_VELOCITY
+			parent_obj.velocity += wall_jump_vector
+
 	parent_obj.move_and_slide()
 
 	if parent_obj.is_on_floor():
