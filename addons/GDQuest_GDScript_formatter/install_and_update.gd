@@ -1,6 +1,9 @@
 @tool
 extends Node
 
+signal installation_completed(binary_path: String)
+signal installation_failed(error_message: String)
+
 enum HttpRequestState {
 	IDLE,
 	FETCHING_RELEASE_INFO,
@@ -8,9 +11,6 @@ enum HttpRequestState {
 }
 
 const URL_GITHUB_API_LATEST_RELEASE = "https://api.github.com/repos/gdquest/GDScript-formatter/releases/latest"
-
-signal installation_completed(binary_path: String)
-signal installation_failed(error_message: String)
 
 var http_request_state := HttpRequestState.IDLE
 var http_request: HTTPRequest = HTTPRequest.new()
