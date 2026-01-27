@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="MoveStateData" load_steps=2 format=3 uid="uid://dd5hsc5a3imx6"]
+
+[ext_resource type="Script" uid="uid://b1ydx7ror70hj" path="res://Scripts/Resource Formats/move_state_data.gd" id="1_otm2d"]
+
+[resource]
+script = ExtResource("1_otm2d")
+idle_gravity_multiplier = 1.0
+move_speed = 30.0
+move_speed_sprint = 30.0
+move_acceleration = 200.0
+move_gravity_multiplier = 1.0
+jump_move_speed = 30.0
+jump_move_speed_sprint = 30.0
+jump_move_acceleration = 150.0
+jump_vertical_velocity = 20.0
+jump_gravity_multiplier = 0.75
+fall_move_speed = 30.0
+fall_move_speed_sprint = 30.0
+fall_move_acceleration = 150.0
+fall_gravity_multiplier = 1.0
+dive_move_speed = 40.0
+dive_move_speed_sprint = 40.0
+dive_move_acceleration = 50.0
+dive_gravity_multiplier = 0.25
+dive_time = 0.2
+dive_speed_min = 30.0
+dive_speed_boost = 20.0
+slide_move_speed_decay = 0.995
+slide_gravity_multiplier = 1.0
+slide_speed_min = 40.0
+slide_speed_boost = 10.0
+slide_jump_speed_boost = 20.0
+slide_slerp_rate = 0.1
+metadata/_custom_type_script = "uid://b1ydx7ror70hj"

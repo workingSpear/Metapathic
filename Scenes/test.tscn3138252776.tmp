@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://dukooihowntnv"]
+
+[ext_resource type="Script" uid="uid://vq2cnw7hk5h7" path="res://Scripts/Player/player.gd" id="1_8od7v"]
+[ext_resource type="Script" uid="uid://b4ia70r53dfff" path="res://Scripts/Player/camera_controller.gd" id="1_lc1oi"]
+[ext_resource type="Script" uid="uid://b7admw81vwxsa" path="res://Scripts/Player/States/movement_state_machine.gd" id="3_35xla"]
+[ext_resource type="Script" uid="uid://cb1vrs51wlmxm" path="res://Scripts/Player/player_movement_component.gd" id="3_qc4db"]
+[ext_resource type="Script" uid="uid://dwkuy5p60r3i5" path="res://Scripts/Player/States/idle.gd" id="3_ys1qc"]
+[ext_resource type="Script" uid="uid://c3fmm64j3llva" path="res://Scripts/Player/States/move.gd" id="5_i3aeo"]
+[ext_resource type="Script" uid="uid://d0e8tvb8nlf5v" path="res://Scenes/jump.gd" id="6_5wyu1"]
+[ext_resource type="Script" uid="uid://ceh74nd0nrk6a" path="res://Scripts/Player/States/fall.gd" id="7_0c07c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3qbn"]
+albedo_color = Color(0.4506483, 0.4506483, 0.45064825, 1)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lc1oi"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8od7v"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lc1oi"]
+radius = 0.07
+
+[node name="Test" type="Node3D"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92873096, 12.330762, 0)
+light_energy = 16.0
+omni_range = 80.70843
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20631695, 0)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(209.59863, 1, 210.5498)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0584173, 2.6353216, 0)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(3.2398553, 4.2610006, 10.743164)
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4905274, 0)
+script = ExtResource("1_8od7v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_lc1oi")
+
+[node name="MeshHolder" type="Node3D" parent="Player"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/MeshHolder"]
+mesh = SubResource("CapsuleMesh_8od7v")
+
+[node name="CameraHolder" type="Node3D" parent="Player" node_paths=PackedStringArray("yaw_node", "pitch_node", "camera")]
+script = ExtResource("1_lc1oi")
+yaw_node = NodePath("CamYaw")
+pitch_node = NodePath("CamYaw/CamPitch")
+camera = NodePath("CamYaw/CamPitch/SpringArm3D/Camera3D")
+
+[node name="CamYaw" type="Node3D" parent="Player/CameraHolder"]
+
+[node name="CamPitch" type="Node3D" parent="Player/CameraHolder/CamYaw"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Player/CameraHolder/CamYaw/CamPitch"]
+shape = SubResource("SphereShape3D_lc1oi")
+spring_length = 9.0
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraHolder/CamYaw/CamPitch/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4478154)
+
+[node name="MovementStateMachine" type="Node" parent="Player"]
+script = ExtResource("3_35xla")
+
+[node name="Idle" type="Node" parent="Player/MovementStateMachine" node_paths=PackedStringArray("move_state", "jump_state", "fall_state")]
+script = ExtResource("3_ys1qc")
+move_state = NodePath("../Move")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+
+[node name="Move" type="Node" parent="Player/MovementStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "fall_state")]
+script = ExtResource("5_i3aeo")
+idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+rotation_speed = 8.0
+
+[node name="Jump" type="Node" parent="Player/MovementStateMachine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state")]
+script = ExtResource("6_5wyu1")
+fall_state = NodePath("../Fall")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+
+[node name="Fall" type="Node" parent="Player/MovementStateMachine" node_paths=PackedStringArray("idle_state", "move_state")]
+script = ExtResource("7_0c07c")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+
+[node name="PlayerMovementComponent" type="Node" parent="Player"]
+script = ExtResource("3_qc4db")
