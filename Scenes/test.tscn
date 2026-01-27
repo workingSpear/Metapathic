@@ -1,19 +1,35 @@
 [gd_scene format=3 uid="uid://dukooihowntnv"]
 
+[ext_resource type="Texture2D" uid="uid://24ohigdjlhx8" path="res://Assets/kenney_prototype_textures/PNG/Light/texture_08.png" id="1_8od7v"]
 [ext_resource type="PackedScene" uid="uid://c4w4pr86rhyji" path="res://Scenes/player.tscn" id="1_lc1oi"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lc1oi"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_8od7v"]
+sky_material = SubResource("ProceduralSkyMaterial_lc1oi")
+
+[sub_resource type="Environment" id="Environment_qc4db"]
+background_mode = 2
+sky = SubResource("Sky_8od7v")
+tonemap_mode = 2
+glow_enabled = true
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3qbn"]
-albedo_color = Color(0.4506483, 0.4506483, 0.45064825, 1)
+albedo_texture = ExtResource("1_8od7v")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
 uv1_triplanar = true
 uv1_world_triplanar = true
 
 [node name="Test" type="Node3D" unique_id=847656016]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=308238758]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92873096, 258.12097, 0)
-light_energy = 3.053
-omni_range = 391.087
-omni_attenuation = 0.0
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1674633605]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=987266988]
+environment = SubResource("Environment_qc4db")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=853117134]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20631695, 0)
