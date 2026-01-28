@@ -6,12 +6,10 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_afpow"]
 
-[node name="Enemy" type="Node3D" unique_id=66813528]
+[node name="Enemy" type="RigidBody3D" unique_id=355322654]
 script = ExtResource("1_hghv2")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=524484574]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=193523981]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=193523981]
 shape = SubResource("CapsuleShape3D_1f0kj")
 
 [node name="Mesh Holder" type="Node3D" parent="." unique_id=1603758992]
