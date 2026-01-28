@@ -21,4 +21,5 @@ func take_damage(damage) -> void:
 		die()
 
 func die() -> void:
-	pass
+	print(owner.name + ": Died")
+	queue_free()

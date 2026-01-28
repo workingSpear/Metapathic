@@ -11,6 +11,8 @@
 viewport_path = NodePath("Healthbar Viewport")
 
 [node name="Enemy" type="RigidBody3D" unique_id=355322654]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
 script = ExtResource("1_hghv2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=193523981]
