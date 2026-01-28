@@ -18,6 +18,10 @@ config/name="Metapathic"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[dotnet]
+
+project/assembly_name="Metapathic"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg")
