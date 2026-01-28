@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://cdwsjr0c3axjk"]
 
 [ext_resource type="Script" uid="uid://cu37txvjp663q" path="res://Scripts/Enemy/enemy.gd" id="1_hghv2"]
+[ext_resource type="PackedScene" uid="uid://dl65nok2d7onw" path="res://Scenes/healthbar.tscn" id="2_1f0kj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1f0kj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_afpow"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_afpow"]
+viewport_path = NodePath("Healthbar Viewport")
 
 [node name="Enemy" type="RigidBody3D" unique_id=355322654]
 script = ExtResource("1_hghv2")
@@ -16,3 +20,14 @@ shape = SubResource("CapsuleShape3D_1f0kj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh Holder" unique_id=2036959748]
 mesh = SubResource("CapsuleMesh_afpow")
+
+[node name="Healthbar Viewport" type="SubViewport" parent="." unique_id=917433112]
+disable_3d = true
+transparent_bg = true
+
+[node name="Healthbar" parent="Healthbar Viewport" unique_id=212510227 instance=ExtResource("2_1f0kj")]
+
+[node name="Healthbar Viewport Sprite" type="Sprite3D" parent="." unique_id=1005267963]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.551841, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_afpow")
