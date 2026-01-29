@@ -2,14 +2,18 @@ using FmodSharp;
 using Godot;
 using System;
 
+// BANK AUTOLOAD MANAGER - loads all FMOD banks at start time for project-wide use.
 public partial class BankAutoloadManager : Node
 {
 	private readonly Godot.Collections.Array _loadedBanks = [];
 	
 	public override void _Ready() {
 		_LoadBanks();
-		GD.Print(_loadedBanks.Count);
 	}
+	
+	// Bank loader architecture cred. straussna - github.com/straussna
+	
+	// BANK LOADER - loads banks from associated FMOD project.
 	private void _LoadBanks() {
 		try {
 			_loadedBanks.Clear();
