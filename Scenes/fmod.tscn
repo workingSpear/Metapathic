@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://dq1ja61yqnhsh"]
 
-[ext_resource type="Script" uid="uid://ru2yda5nphjb" path="res://Scenes/AudioManager.cs" id="1_qkp5x"]
-[ext_resource type="Script" uid="uid://blitnn4ec88y1" path="res://Scenes/EventManager.cs" id="2_hd0s7"]
+[ext_resource type="Script" uid="uid://ru2yda5nphjb" path="res://Scripts/Audio/AudioManager.cs" id="1_qkp5x"]
+[ext_resource type="Script" uid="uid://blitnn4ec88y1" path="res://Scripts/Audio/EventManager.cs" id="2_hd0s7"]
+[ext_resource type="Script" uid="uid://0hwemgd81cx5" path="res://Scripts/Audio/BankAutoloadManager.cs" id="3_d3fpx"]
 
-[node name="FmodBankLoader" type="FmodBankLoader" unique_id=1949007626]
-bank_paths = ["res://METAPATHIC_FMODProject/Build/banks/Master.strings.bank", "res://METAPATHIC_FMODProject/Build/banks/Master.bank", "res://METAPATHIC_FMODProject/Build/banks/Music.bank", "res://METAPATHIC_FMODProject/Build/banks/SFX.bank"]
+[node name="FMOD" type="Node" unique_id=532792176]
 
-[node name="AudioManager" type="Node" parent="." unique_id=1392902248]
+[node name="AudioManager" type="Node" parent="." unique_id=50495026]
 script = ExtResource("1_qkp5x")
 
-[node name="EventManager" type="Node" parent="." unique_id=1943958414]
+[node name="EventManager" type="Node" parent="." unique_id=1055715453]
 script = ExtResource("2_hd0s7")
+
+[node name="BankAutoloadManager" type="Node" parent="." unique_id=835069543]
+script = ExtResource("3_d3fpx")

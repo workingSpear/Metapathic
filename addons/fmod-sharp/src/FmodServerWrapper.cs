@@ -322,15 +322,15 @@ public partial class FmodServerWrapper : Node
 		return obj;
 	}
 
-	public static string GetEventGuid(string eventPath)
+	public static string GetEventGuid(string guid)
 	{
-		Variant result = FmodServer.Call("get_event_guid", eventPath);
+		Variant result = FmodServer.Call("get_event_guid", guid);
 		return result.AsString();
 	}
 
-	public static string GetEventPath(string guid)
+	public static string GetEventPath(string eventPath)
 	{
-		Variant result = FmodServer.Call("get_event_path", guid);
+		Variant result = FmodServer.Call("get_event_path", eventPath);
 		return result.AsString();
 	}
 
