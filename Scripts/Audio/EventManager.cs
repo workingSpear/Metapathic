@@ -16,9 +16,7 @@ public partial class EventManager : Node
 		EventReference = new Dictionary<string, string>();
 		
 		EventReference.Add("TEST MUSIC", "event:/TEST MUSIC");
-		GD.Print("TEST CASE: TEST MUSIC path is " + EventReference["TEST MUSIC"]);
 		EventReference.Add("TEST SFX", "event:/TEST SFX");
-		GD.Print("TEST CASE: TEST SFX path is " + EventReference["TEST SFX"]);
 	}
 }
 
