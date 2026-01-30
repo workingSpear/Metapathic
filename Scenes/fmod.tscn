@@ -6,11 +6,11 @@
 
 [node name="FMOD" type="Node" unique_id=532792176]
 
-[node name="AudioManager" type="Node" parent="." unique_id=50495026]
-script = ExtResource("1_qkp5x")
-
-[node name="EventManager" type="Node" parent="." unique_id=1055715453]
-script = ExtResource("2_hd0s7")
-
 [node name="BankAutoloadManager" type="Node" parent="." unique_id=835069543]
 script = ExtResource("3_d3fpx")
+
+[node name="AudioManager" type="Node" parent="BankAutoloadManager" unique_id=50495026]
+script = ExtResource("1_qkp5x")
+
+[node name="EventManager" type="Node" parent="BankAutoloadManager" unique_id=1055715453]
+script = ExtResource("2_hd0s7")

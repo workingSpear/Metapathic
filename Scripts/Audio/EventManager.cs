@@ -9,14 +9,29 @@ using System.Collections.Generic;
 public partial class EventManager : Node
 {
 	// EVENT REFERENCES - a collection of data-value pairs that store reference 
-	// keys and their associated path values
+	// keys and their associated GUID values
 	public Dictionary<string, string> EventReference;
 	
 	public override void _Ready() {
 		EventReference = new Dictionary<string, string>();
 		
+		_LoadEventReferences();
+		
 		EventReference.Add("TEST MUSIC", "event:/TEST MUSIC");
+		if (FmodServerWrapper.CheckEventPath(EventReference["TEST MUSIC"])) {
+			GD.Print("TEST MUSIC has valid path.");
+		}
+		else { GD.Print("Was not able to find valid path for TEST MUSIC."); }
 		EventReference.Add("TEST SFX", "event:/TEST SFX");
+		if (FmodServerWrapper.CheckEventPath(EventReference["TEST SFX"])) {
+			GD.Print("TEST SFX has valid path.");
+		}
+		else { GD.Print("Was not able to find valid path for TEST SFX."); }
+	}
+	
+	private void _LoadEventReferences() {
+		// unit test to ensure event description get
+		GD.Print(FmodServerWrapper.GetAllEventDescriptions().Count);
 	}
 }
 

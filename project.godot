@@ -26,9 +26,9 @@ config/icon="res://icon.svg"
 
 FmodManager="*uid://cds10pm7hwn3p"
 FmodServerWrapper="*uid://bf7jwxhvq127"
+BankAutoloadManager="*uid://0hwemgd81cx5"
 AudioManager="*uid://ru2yda5nphjb"
 EventManager="*uid://blitnn4ec88y1"
-BankAutoloadManager="*uid://0hwemgd81cx5"
 
 [dotnet]
 
