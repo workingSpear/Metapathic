@@ -2,6 +2,15 @@ using FmodSharp;
 using Godot;
 using System;
 
+// IMPORTANT!! //
+
+// the BankAutoloadManager IS A DEPENDENCY for the AudioManager and
+// EventManager; please ensure that BankAutoloadManager autoloads before the
+// AudioManager and EventManager, and that BankAutoloadManager is the root for the
+// AudioManager and EventManager, in order to call paths
+
+// IMPORTANT!! //
+
 // BANK AUTOLOAD MANAGER - loads all FMOD banks at start time for project-wide use.
 public partial class BankAutoloadManager : Node
 {
