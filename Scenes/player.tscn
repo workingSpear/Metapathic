@@ -19,6 +19,7 @@
 radius = 0.07
 
 [node name="Player" type="CharacterBody3D" unique_id=2056012491]
+collision_layer = 2
 script = ExtResource("1_f1ek2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1866321046]
