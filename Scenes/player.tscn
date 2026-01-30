@@ -15,9 +15,6 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8od7v"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_lc1oi"]
-radius = 0.07
-
 [node name="Player" type="CharacterBody3D" unique_id=2056012491]
 collision_layer = 2
 script = ExtResource("1_f1ek2")
@@ -30,22 +27,15 @@ shape = SubResource("CapsuleShape3D_lc1oi")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshHolder" unique_id=1672008052]
 mesh = SubResource("CapsuleMesh_8od7v")
 
-[node name="PlayerCameraHolder" type="Node3D" parent="." unique_id=358109416 node_paths=PackedStringArray("yaw_node", "pitch_node", "camera")]
+[node name="PlayerCameraHolder" type="Node3D" parent="." unique_id=358109416 node_paths=PackedStringArray("pivot_node", "camera")]
 script = ExtResource("2_tx1dd")
-yaw_node = NodePath("CamYaw")
-pitch_node = NodePath("CamYaw/CamPitch")
-camera = NodePath("CamYaw/CamPitch/SpringArm3D/Camera3D")
+pivot_node = NodePath(".")
+camera = NodePath("SpringArm3D/Camera3D")
 
-[node name="CamYaw" type="Node3D" parent="PlayerCameraHolder" unique_id=749047395]
+[node name="SpringArm3D" type="SpringArm3D" parent="PlayerCameraHolder" unique_id=945672715]
+spring_length = 10.0
 
-[node name="CamPitch" type="Node3D" parent="PlayerCameraHolder/CamYaw" unique_id=1623153408]
-
-[node name="SpringArm3D" type="SpringArm3D" parent="PlayerCameraHolder/CamYaw/CamPitch" unique_id=945672715]
-shape = SubResource("SphereShape3D_lc1oi")
-spring_length = 9.0
-
-[node name="Camera3D" type="Camera3D" parent="PlayerCameraHolder/CamYaw/CamPitch/SpringArm3D" unique_id=1354213438]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4478154)
+[node name="Camera3D" type="Camera3D" parent="PlayerCameraHolder/SpringArm3D" unique_id=1354213438]
 
 [node name="MoveStateMachine" type="Node" parent="." unique_id=564377469 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_gymyn")
