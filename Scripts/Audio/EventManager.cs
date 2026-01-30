@@ -13,9 +13,15 @@ public partial class EventManager : Node
 	public Dictionary<string, string> EventReference;
 	
 	public override void _Ready() {
-		_LoadEventReferences();
-	}
-	private void _LoadEventReferences() {
+		EventReference = new Dictionary<string, string>();
 		
+		EventReference.Add("TEST MUSIC", "event:/TEST MUSIC");
+		GD.Print("TEST CASE: TEST MUSIC path is " + EventReference["TEST MUSIC"]);
+		EventReference.Add("TEST SFX", "event:/TEST SFX");
+		GD.Print("TEST CASE: TEST SFX path is " + EventReference["TEST SFX"]);
 	}
 }
+
+// FIXME: i've tried to make the code for this manager elegant over the course of 
+// days now, and unfortunately this damn plugin pushes back against me at every turn. 
+// so i've decided it will be ugly until i can get some peer review LMFAOOOOOOOOOO.
