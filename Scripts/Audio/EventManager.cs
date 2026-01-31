@@ -28,14 +28,10 @@ public partial class EventManager : Node
 		
 		foreach (GodotObject obj in eventDescs) {
 			if (obj != null) {
-				GD.Print("TEST CASE: Path to event is " + obj.Call("get_path"));
-				
 				string path = (string)obj.Call("get_path");
 				int cullPos = path.IndexOf('/') + 1;
 				
 				string eventName = path.Substring(cullPos);
-				
-				GD.Print("Path, " + path + " - Name, " + eventName + '\n');
 				
 				EventReference.Add(eventName, path);
 			}
