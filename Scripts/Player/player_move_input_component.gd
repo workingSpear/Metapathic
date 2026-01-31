@@ -8,7 +8,7 @@ func get_input_move_direction() -> Vector3:
 	var move_direction: Vector3
 	move_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	move_direction.z = Input.get_action_strength("backward") - Input.get_action_strength("forward")
-	return move_direction
+	return move_direction.normalized() if !move_direction.is_zero_approx() else Vector3.ZERO
 
 
 func get_input_move_rotation() -> float:

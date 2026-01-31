@@ -26,8 +26,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	pitch = clamp(pitch, pitch_min, pitch_max)
 
-	pivot_node.rotation_degrees.y = lerp(pivot_node.rotation_degrees.y, yaw, yaw_accel * delta)
-	pivot_node.rotation_degrees.x = lerp(pivot_node.rotation_degrees.x, pitch, pitch_accel * delta)
+	#With smoothing
+	#pivot_node.rotation_degrees.y = lerp(pivot_node.rotation_degrees.y, yaw, yaw_accel * delta)
+	#pivot_node.rotation_degrees.x = lerp(pivot_node.rotation_degrees.x, pitch, pitch_accel * delta)
+
+	pivot_node.rotation_degrees.y = yaw
+	pivot_node.rotation_degrees.x = pitch
 
 	set_cam_rotation.emit(pivot_node.rotation.y)
 

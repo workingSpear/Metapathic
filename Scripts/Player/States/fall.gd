@@ -24,8 +24,8 @@ func process_physics(delta: float) -> String:
 
 	parent_obj.velocity.y -= gravity * move_data.fall_gravity_multiplier * delta
 	# Wall jump
-	if parent_obj.is_on_wall_only():
-		if move_component.get_input_jump_press():
+	if move_component.get_input_jump_press():
+		if parent_obj.is_on_wall_only():
 			var WALL_JUMP_VERTICAL_VELOCITY: float = move_data.jump_vertical_velocity * 0.9
 			var WALL_JUMP_NORMAL_MAGNITUDE: float = 50.0
 			var wall_jump_vector: Vector3 = parent_obj.get_wall_normal() * WALL_JUMP_NORMAL_MAGNITUDE
