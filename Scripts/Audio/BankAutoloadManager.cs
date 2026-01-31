@@ -2,14 +2,14 @@ using FmodSharp;
 using Godot;
 using System;
 
-// IMPORTANT!! //
+// --- IMPORTANT!! --- //
 
 // the BankAutoloadManager IS A DEPENDENCY for the AudioManager and
 // EventManager; please ensure that BankAutoloadManager autoloads before the
-// AudioManager and EventManager, and that BankAutoloadManager is the root for the
-// AudioManager and EventManager, in order to call paths
+// AudioManager and EventManager and that BankAutoloadManager is the root for the
+// AudioManager and EventManager in order to call paths from your FMOD project.
 
-// IMPORTANT!! //
+// --- IMPORTANT!! --- //
 
 // BANK AUTOLOAD MANAGER - loads all FMOD banks at start time for project-wide use.
 public partial class BankAutoloadManager : Node
@@ -22,7 +22,7 @@ public partial class BankAutoloadManager : Node
 	
 	// bank loader architecture cred. straussna - github.com/straussna
 	
-	// BANK LOADER - loads banks from associated FMOD project.
+	// BANK LOADER - loads banks from linked FMOD project.
 	private void _LoadBanks() {
 		try {
 			_loadedBanks.Clear();

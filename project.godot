@@ -10,7 +10,7 @@ config_version=5
 
 [Fmod]
 
-General/banks_path="res://METAPATHIC_FMODProject/Build/banks"
+General/banks_path="res://METAPATHIC_FMODProject/Build/Desktop"
 
 [animation]
 

@@ -1,5 +1,6 @@
 using FmodSharp;
 using Godot;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,30 +9,41 @@ using System.Collections.Generic;
 // to be called through the EventManager anywhere in the project.
 public partial class EventManager : Node
 {
-	// EVENT REFERENCES - a collection of data-value pairs that store reference 
-	// keys and their associated GUID values
+	// EVENT REFERENCES - a dictionary of data-value pairs that store reference 
+	// keys and their associated paths.
 	public Dictionary<string, string> EventReference;
 	
 	public override void _Ready() {
 		EventReference = new Dictionary<string, string>();
-		
 		_LoadEventReferences();
-		
-		EventReference.Add("TEST MUSIC", "event:/TEST MUSIC");
-		if (FmodServerWrapper.CheckEventPath(EventReference["TEST MUSIC"])) {
-			GD.Print("TEST MUSIC has valid path.");
-		}
-		else { GD.Print("Was not able to find valid path for TEST MUSIC."); }
-		EventReference.Add("TEST SFX", "event:/TEST SFX");
-		if (FmodServerWrapper.CheckEventPath(EventReference["TEST SFX"])) {
-			GD.Print("TEST SFX has valid path.");
-		}
-		else { GD.Print("Was not able to find valid path for TEST SFX."); }
 	}
 	
+	// LOAD EVENT REFERENCES - private helper function dedicated to retrieving all
+	// event descriptions from the linked FMOD project and loading them into the
+	// EventReference dictionary provided by the EventManager, parsing their event
+	// names and paths.
 	private void _LoadEventReferences() {
-		// unit test to ensure event description get
-		GD.Print(FmodServerWrapper.GetAllEventDescriptions().Count);
+		Godot.Collections.Array eventDescs = [];
+		eventDescs = FmodServerWrapper.GetAllEventDescriptions();
+		
+		foreach (GodotObject obj in eventDescs) {
+			if (obj != null) {
+				GD.Print("TEST CASE: Path to event is " + obj.Call("get_path"));
+				
+				string path = (string)obj.Call("get_path");
+				int cullPos = path.IndexOf('/') + 1;
+				
+				string eventName = path.Substring(cullPos);
+				
+				GD.Print("Path, " + path + " - Name, " + eventName + '\n');
+				
+				EventReference.Add(eventName, path);
+			}
+			else {
+				GD.Print("TEST CASE: ERROR - Invalid path");
+				continue;
+			}
+		}
 	}
 }
 

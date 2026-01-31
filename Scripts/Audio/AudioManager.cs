@@ -21,11 +21,49 @@ public partial class AudioManager : Node
 	public GodotObject sfxBus;
 	
 	// EVENT STORAGE - a list of all event instances. used for cleanup on destroy.
-	// private List<FmodEvent> eventInstances;
+	private List<FmodEvent> eventInstances;
 	
 	public override void _Ready() {
+		eventInstances = new List<FmodEvent>();
+		
 		masterBus = FmodServerWrapper.GetBus("bus:/");
 		musicBus = FmodServerWrapper.GetBus("bus:/Music");
 		sfxBus = FmodServerWrapper.GetBus("bus:/SFX");
+	}
+	
+	// DESTROY - on object destruction, call and run the Cleanup method.
+	public override void _Notification(int what) {
+		if (what == NotificationPredelete) { Cleanup(); }
+	}
+	
+	// CLEAN-UP - stop and free all FMOD event instances currently in use by this
+	// AudioManager.
+	public void Cleanup() {
+		foreach (FmodEvent instance in eventInstances) {
+			instance.Stop(FmodServerWrapper.FMOD_STUDIO_STOP_IMMEDIATE);
+			instance.Release();
+		}
+	}
+	
+	// PLAY ONE SHOT - calls path to an FMOD event without instantiating an event
+	// instance.
+	public void PlayOneShot(string eventReference) {
+		FmodServerWrapper.PlayOneShot(eventReference);
+	}
+	
+	// CREATE EVENT INSTANCE - creates an instance of an FMOD event to be continuously 
+	// used throughout the game.
+	public FmodEvent CreateEventInstance(string eventReference) {
+		FmodEvent eventInstance = FmodServerWrapper.CreateEventInstance(eventReference);
+		eventInstances.Add(eventInstance);
+		return eventInstance;
+	}
+	
+	// SET INSTANCE PARAMETER - takes an event instance, the desired parameter of 
+	// that event instance, and the desired parameter value to actively adjust the
+	// parameter in the linked FMOD project.
+	public void SetEventInstanceParameter(
+		FmodEvent eventInstance,  string paramName, float paramVal) {
+		eventInstance.SetParameterByName(paramName, paramVal);
 	}
 }
