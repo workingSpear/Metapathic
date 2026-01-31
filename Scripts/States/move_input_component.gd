@@ -12,11 +12,19 @@ extends Node
 ## MoveInputComponent. The Player might receive inputs from button inputs, while
 ## an enemy might receive inputs from pathfinding.
 
+var last_input_move_direction: Vector3 = Vector3.FORWARD
+
 
 ## Returns a Vector3 indicating the character's target move
 ## direction, or Vector3.ZERO if there is no input.
 func get_input_move_direction() -> Vector3:
 	return Vector3.ZERO
+
+
+## Returns a Vector3 indicating the character's last non-zero
+## target move direction.
+func get_last_input_move_direction() -> Vector3:
+	return last_input_move_direction
 
 
 ## Returns a float indicating the angle to rotate the character's movement.

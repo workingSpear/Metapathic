@@ -15,6 +15,9 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8od7v"]
 
+[sub_resource type="PrismMesh" id="PrismMesh_tx1dd"]
+size = Vector3(0.25, 0.25, 0.25)
+
 [node name="Player" type="CharacterBody3D" unique_id=2056012491]
 collision_layer = 2
 script = ExtResource("1_f1ek2")
@@ -27,6 +30,10 @@ shape = SubResource("CapsuleShape3D_lc1oi")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshHolder" unique_id=1672008052]
 mesh = SubResource("CapsuleMesh_8od7v")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshHolder" unique_id=76001889]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.35, -0.5)
+mesh = SubResource("PrismMesh_tx1dd")
+
 [node name="PlayerCameraHolder" type="Node3D" parent="." unique_id=358109416 node_paths=PackedStringArray("pivot_node", "camera")]
 script = ExtResource("2_tx1dd")
 pivot_node = NodePath(".")
@@ -36,6 +43,16 @@ camera = NodePath("SpringArm3D/Camera3D")
 spring_length = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="PlayerCameraHolder/SpringArm3D" unique_id=1354213438]
+
+[node name="WallCheckRaycastFeet" type="RayCast3D" parent="." unique_id=946604825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+enabled = false
+target_position = Vector3(0, 0, 1)
+
+[node name="LedgeCheckRaycast" type="RayCast3D" parent="." unique_id=129737479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+enabled = false
+target_position = Vector3(0, -2.4, 0)
 
 [node name="MoveStateMachine" type="Node" parent="." unique_id=564377469 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_gymyn")

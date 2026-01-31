@@ -25,6 +25,10 @@ var mesh_holder: Node3D
 var move_component: MoveInputComponent
 ## The MoveStateData that contains movement data.
 var move_data: MoveStateData
+## Raycast to check for walls, from the character's foot.
+var wall_check_raycast_feet: RayCast3D
+## Raycast to check for ledges. Points down.
+var ledge_check_raycast: RayCast3D
 ## The project's default gravity strength.
 var gravity: int = ProjectSettings.get_setting("physics/3d/default_gravity")
 

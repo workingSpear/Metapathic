@@ -30,6 +30,11 @@ func process_physics(delta: float) -> String:
 	parent_obj.velocity.y -= gravity * move_data.jump_gravity_multiplier * delta
 	parent_obj.move_and_slide()
 
+	# Rotate the mesh towards the current velocity.
+	var horizontal_velocity = Vector3(parent_obj.velocity.x, 0.0, parent_obj.velocity.z)
+	if !horizontal_velocity.is_zero_approx():
+		mesh_holder.look_at(parent_obj.position + horizontal_velocity)
+
 	if parent_obj.is_on_floor():
 		if move_component.get_input_slide_hold():
 			return Slide.state_name
