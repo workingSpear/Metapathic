@@ -42,7 +42,3 @@ public partial class EventManager : Node
 		}
 	}
 }
-
-// FIXME: i've tried to make the code for this manager elegant over the course of 
-// days now, and unfortunately this damn plugin pushes back against me at every turn. 
-// so i've decided it will be ugly until i can get some peer review LMFAOOOOOOOOOO.
