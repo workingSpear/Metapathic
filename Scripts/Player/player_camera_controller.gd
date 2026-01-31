@@ -23,7 +23,7 @@ func _ready() -> void:
 	pitch_sensitivity = player_preferences.pitch_sensitivity
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	pitch = clamp(pitch, pitch_min, pitch_max)
 
 	#With smoothing
@@ -40,3 +40,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		yaw += -event.relative.x * yaw_sensitivity
 		pitch += -event.relative.y * pitch_sensitivity
+	if event.is_action_pressed("pause"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
