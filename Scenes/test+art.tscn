@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://b8le75qj0pb3q"]
+
+[ext_resource type="PackedScene" uid="uid://c4w4pr86rhyji" path="res://Scenes/player.tscn" id="1_cv5s8"]
+[ext_resource type="Texture2D" uid="uid://24ohigdjlhx8" path="res://Assets/kenney_prototype_textures/PNG/Light/texture_08.png" id="2_4lme0"]
+[ext_resource type="PackedScene" uid="uid://dscsi2yf3j77q" path="res://Assets/Models/metapathic_structure_01.tscn" id="2_vqjhy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lc1oi"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_8od7v"]
+sky_material = SubResource("ProceduralSkyMaterial_lc1oi")
+
+[sub_resource type="Environment" id="Environment_qc4db"]
+background_mode = 2
+sky = SubResource("Sky_8od7v")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3qbn"]
+albedo_texture = ExtResource("2_4lme0")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="PrismMesh" id="PrismMesh_8od7v"]
+size = Vector3(10, 4.98, 10)
+
+[node name="Test" type="Node3D" unique_id=847656016]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1674633605]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=987266988]
+environment = SubResource("Environment_qc4db")
+
+[node name="Player" parent="." unique_id=1691484442 instance=ExtResource("1_cv5s8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.566843, 2, 0)
+
+[node name="Metapathic_Structure_02" parent="." unique_id=1101306910 instance=ExtResource("2_vqjhy")]
+
+[node name="Node3D" type="Node3D" parent="." unique_id=227166622]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 72.55914, -0.65501785, -160.77783)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D" unique_id=853117134]
+transform = Transform3D(0.22022575, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0.20631695, 0)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(209.59863, 1, 210.5498)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D" unique_id=1653020781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0584173, 10.036347, 0)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(3.2398553, 19.063053, 10.743164)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Node3D" unique_id=964079330]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.058418, 10.036347, 0)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(3.2398553, 19.063053, 10.743164)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D" unique_id=245745752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0584173, 4.8201447, -16.538685)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(10, 15, 10)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D" unique_id=1524043154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0584173, 3.8201447, -28.538685)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(10, 7, 10)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Node3D" unique_id=657881046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0584173, 2.8201447, -40.538685)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(10, 5, 10)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Node3D" unique_id=1481382569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0584173, 1.8201447, -52.538685)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(10, 3, 10)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Node3D" unique_id=237988194]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0584173, 1.5319977, -63.538685)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+size = Vector3(10, 2.5, 10)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Node3D" unique_id=1146761303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0584173, 1.5319977, -80.931915)
+material_override = SubResource("StandardMaterial3D_o3qbn")
+use_collision = true
+mesh = SubResource("PrismMesh_8od7v")
