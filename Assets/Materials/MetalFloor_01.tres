@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b08hj0b4d8es6"]
+
+[ext_resource type="Texture2D" uid="uid://h03ddvbk60xd" path="res://Assets/Textures/GroundMetal.png" id="1_btgml"]
+
+[resource]
+albedo_texture = ExtResource("1_btgml")
+metallic_specular = 0.0
+roughness = 0.0
+texture_filter = 0

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c4w4pr86rhyji" path="res://Scenes/player.tscn" id="1_cv5s8"]
 [ext_resource type="Texture2D" uid="uid://24ohigdjlhx8" path="res://Assets/kenney_prototype_textures/PNG/Light/texture_08.png" id="2_4lme0"]
 [ext_resource type="PackedScene" uid="uid://dscsi2yf3j77q" path="res://Assets/Models/metapathic_structure_01.tscn" id="2_vqjhy"]
+[ext_resource type="PackedScene" uid="uid://do0kmyvt6cyrf" path="res://Assets/Models/Metapathic_Dummy.fbx" id="4_vqjhy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lc1oi"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -96,3 +97,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0584173, 1.5319977, -80.93
 material_override = SubResource("StandardMaterial3D_o3qbn")
 use_collision = true
 mesh = SubResource("PrismMesh_8od7v")
+
+[node name="Metapathic_Dummy" parent="." unique_id=169135728 instance=ExtResource("4_vqjhy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.095796, 0.009625912, -3.7838945)

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c1nv3g6f5766r"]
+
+[ext_resource type="Texture2D" uid="uid://6ltxv3o5ypnc" path="res://Assets/Textures/MetalPipe.png" id="1_xeyf4"]
+
+[resource]
+albedo_texture = ExtResource("1_xeyf4")
+metallic_specular = 0.0
+roughness = 0.0
+texture_filter = 0
