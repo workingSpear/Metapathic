@@ -72,9 +72,6 @@ func process_input(_event: InputEvent) -> String:
 					parent_obj.position = ledge_check_raycast.get_collision_point() + Vector3(0.0, move_data.ledge_climb_target_height, 0.0)
 					return ""
 		if parent_obj.is_on_wall_only():
-			var WALL_JUMP_VERTICAL_VELOCITY: float = move_data.jump_vertical_velocity * 0.9
-			var WALL_JUMP_NORMAL_MAGNITUDE: float = 50.0
-			var wall_jump_vector: Vector3 = parent_obj.get_wall_normal() * WALL_JUMP_NORMAL_MAGNITUDE
-			parent_obj.velocity.y = max(parent_obj.velocity.y, 0.0) + WALL_JUMP_VERTICAL_VELOCITY
-			parent_obj.velocity += wall_jump_vector
+			parent_obj.velocity.y = max(parent_obj.velocity.y, 0.0) + move_data.wall_jump_vertical_velocity
+			parent_obj.velocity += parent_obj.get_wall_normal() * move_data.wall_jump_normal_velocity
 	return ""

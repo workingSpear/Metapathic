@@ -34,4 +34,6 @@ slide_slerp_rate = 0.1
 ledge_climb_height_above_parent = 2.0
 ledge_climb_raycast_distance = 3.0
 ledge_climb_target_height = 1.0
+wall_jump_vertical_velocity = 18.0
+wall_jump_normal_velocity = 50.0
 metadata/_custom_type_script = "uid://b1ydx7ror70hj"

@@ -43,3 +43,8 @@ extends Resource
 ## The height above the ledge which the parent snaps to.
 ## Needs to account for the height of the parent model.
 @export var ledge_climb_target_height: float
+@export_group("Wall Jump", "wall_jump_")
+@export var wall_jump_vertical_velocity: float
+## The velocity added in the direction of the wall normal.
+## Essentially, how much the parent is pushed away from the wall.
+@export var wall_jump_normal_velocity: float
