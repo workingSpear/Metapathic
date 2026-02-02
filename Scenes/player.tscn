@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4w4pr86rhyji"]
+[gd_scene format=3 uid="uid://c4w4pr86rhyji"]
 
 [ext_resource type="Script" uid="uid://vq2cnw7hk5h7" path="res://Scripts/Player/player.gd" id="1_f1ek2"]
 [ext_resource type="Script" uid="uid://b4ia70r53dfff" path="res://Scripts/Player/player_camera_controller.gd" id="2_tx1dd"]
@@ -15,61 +15,69 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8od7v"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_lc1oi"]
-radius = 0.07
+[sub_resource type="PrismMesh" id="PrismMesh_tx1dd"]
+size = Vector3(0.25, 0.25, 0.25)
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" unique_id=2056012491]
+collision_layer = 2
 script = ExtResource("1_f1ek2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1866321046]
 shape = SubResource("CapsuleShape3D_lc1oi")
 
-[node name="MeshHolder" type="Node3D" parent="."]
+[node name="MeshHolder" type="Node3D" parent="." unique_id=207937507]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshHolder"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshHolder" unique_id=1672008052]
 mesh = SubResource("CapsuleMesh_8od7v")
 
-[node name="PlayerCameraHolder" type="Node3D" parent="." node_paths=PackedStringArray("yaw_node", "pitch_node", "camera")]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshHolder" unique_id=76001889]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.35, -0.5)
+mesh = SubResource("PrismMesh_tx1dd")
+
+[node name="PlayerCameraHolder" type="Node3D" parent="." unique_id=358109416 node_paths=PackedStringArray("pivot_node", "camera")]
 script = ExtResource("2_tx1dd")
-yaw_node = NodePath("CamYaw")
-pitch_node = NodePath("CamYaw/CamPitch")
-camera = NodePath("CamYaw/CamPitch/SpringArm3D/Camera3D")
+pivot_node = NodePath(".")
+camera = NodePath("SpringArm3D/Camera3D")
 
-[node name="CamYaw" type="Node3D" parent="PlayerCameraHolder"]
+[node name="SpringArm3D" type="SpringArm3D" parent="PlayerCameraHolder" unique_id=945672715]
+spring_length = 10.0
 
-[node name="CamPitch" type="Node3D" parent="PlayerCameraHolder/CamYaw"]
+[node name="Camera3D" type="Camera3D" parent="PlayerCameraHolder/SpringArm3D" unique_id=1354213438]
 
-[node name="SpringArm3D" type="SpringArm3D" parent="PlayerCameraHolder/CamYaw/CamPitch"]
-shape = SubResource("SphereShape3D_lc1oi")
-spring_length = 9.0
+[node name="WallCheckRaycastFeet" type="RayCast3D" parent="." unique_id=946604825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+enabled = false
+target_position = Vector3(0, 0, 1)
 
-[node name="Camera3D" type="Camera3D" parent="PlayerCameraHolder/CamYaw/CamPitch/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4478154)
+[node name="LedgeCheckRaycast" type="RayCast3D" parent="." unique_id=129737479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+enabled = false
+target_position = Vector3(0, -3, 0)
 
-[node name="MoveStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+[node name="MoveStateMachine" type="Node" parent="." unique_id=564377469 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_gymyn")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="MoveStateMachine"]
+[node name="Idle" type="Node" parent="MoveStateMachine" unique_id=1008890749]
 script = ExtResource("4_pu2lt")
 
-[node name="Move" type="Node" parent="MoveStateMachine"]
+[node name="Move" type="Node" parent="MoveStateMachine" unique_id=1444028372]
 script = ExtResource("5_ukyrk")
 
-[node name="Jump" type="Node" parent="MoveStateMachine"]
+[node name="Jump" type="Node" parent="MoveStateMachine" unique_id=752538540]
 script = ExtResource("6_7dp3o")
 
-[node name="Fall" type="Node" parent="MoveStateMachine"]
+[node name="Fall" type="Node" parent="MoveStateMachine" unique_id=2044835526]
 script = ExtResource("7_h4iuc")
 
-[node name="Dive" type="Node" parent="MoveStateMachine"]
+[node name="Dive" type="Node" parent="MoveStateMachine" unique_id=201389168]
 script = ExtResource("8_fd4e3")
 
-[node name="Slide" type="Node" parent="MoveStateMachine"]
+[node name="Slide" type="Node" parent="MoveStateMachine" unique_id=2081744609]
 script = ExtResource("9_tx1dd")
 metadata/_custom_type_script = "uid://c1hcfet7aapu"
 
-[node name="PlayerMoveInputComponent" type="Node" parent="."]
+[node name="PlayerMoveInputComponent" type="Node" parent="." unique_id=1701254699]
 script = ExtResource("9_qqcod")
 
 [connection signal="set_cam_rotation" from="PlayerCameraHolder" to="MoveStateMachine/Move" method="_on_camera_holder_set_cam_rotation"]
