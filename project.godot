@@ -8,6 +8,10 @@
 
 config_version=5
 
+[Fmod]
+
+General/banks_path="res://METAPATHIC_FMODProject/Build/Desktop"
+
 [animation]
 
 compatibility/default_parent_skeleton_in_mesh_instance_3d=true
@@ -15,7 +19,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Metapathic"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
@@ -23,9 +27,21 @@ config/icon="res://icon.svg"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 
+[autoload]
+
+FmodManager="*uid://cds10pm7hwn3p"
+FmodServerWrapper="*uid://bf7jwxhvq127"
+BankAutoloadManager="*uid://0hwemgd81cx5"
+AudioManager="*uid://ru2yda5nphjb"
+EventManager="*uid://blitnn4ec88y1"
+
+[dotnet]
+
+project/assembly_name="Metapathic"
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/fmod-sharp/plugin.cfg", "res://addons/fmod/plugin.cfg")
 
 [input]
 
