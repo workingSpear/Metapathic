@@ -31,6 +31,24 @@ func process_physics(delta: float) -> String:
 	if !horizontal_velocity.is_zero_approx():
 		mesh_holder.look_at(parent_obj.position + horizontal_velocity)
 
+	# Jump input can lead to a ledge climb or wall jump.
+	if move_component.get_input_jump_press():
+		# Check for ledge to climb.
+		if is_moving_toward_ledge():
+			#print("ledge!")
+			parent_obj.position = ledge_check_raycast.get_collision_point() + Vector3(0.0, move_data.ledge_climb_target_height, 0.0)
+			parent_obj.velocity.y = 0.0
+			# Transition into target state.
+			if move_component.get_input_slide_hold():
+				return Slide.state_name
+			if move_direction.is_zero_approx() and parent_obj.velocity.is_zero_approx():
+				return Idle.state_name
+			return Move.state_name
+		# Check for wall to wall jump from.
+		elif parent_obj.is_on_wall_only():
+			parent_obj.velocity.y = max(parent_obj.velocity.y, 0.0) + move_data.wall_jump_vertical_velocity
+			parent_obj.velocity += parent_obj.get_wall_normal() * move_data.wall_jump_normal_velocity
+
 	if parent_obj.is_on_floor():
 		if move_component.get_input_slide_hold():
 			return Slide.state_name
@@ -48,30 +66,24 @@ func get_move_speed() -> float:
 	return move_data.fall_move_speed_sprint if move_component.get_input_sprint_hold() else move_data.fall_move_speed
 
 
-func is_moving_towards_wall() -> bool:
-	return true
+func is_moving_toward_wall() -> bool:
+	wall_check_raycast_feet.target_position = move_component.get_last_input_move_direction().rotated(Vector3.UP, move_component.get_input_move_rotation())
+	wall_check_raycast_feet.force_raycast_update()
+
+	if !wall_check_raycast_feet.is_colliding():
+		return false
+
+	return wall_check_raycast_feet.get_collision_normal().angle_to(parent_obj.up_direction) > parent_obj.floor_max_angle
 
 
-func process_input(_event: InputEvent) -> String:
-	if (_event.is_action_pressed("jump")):
-		# Check for ledge to climb.
-		wall_check_raycast_feet.target_position = move_component.get_last_input_move_direction().rotated(Vector3.UP, move_component.get_input_move_rotation())
-		wall_check_raycast_feet.force_raycast_update()
-		if wall_check_raycast_feet.is_colliding():
-			print("hit!")
-			if wall_check_raycast_feet.get_collision_normal().angle_to(Vector3.UP) > parent_obj.floor_max_angle:
-				print("wall!")
-				var position: Vector3 = wall_check_raycast_feet.get_collision_point()
-				ledge_check_raycast.global_position.x = position.x
-				ledge_check_raycast.global_position.y = parent_obj.global_position.y + move_data.ledge_climb_height_above_parent
-				ledge_check_raycast.global_position.z = position.z
-				ledge_check_raycast.force_raycast_update()
-				if ledge_check_raycast.is_colliding():
-					print("ledge!")
-					# Add the height of the character model
-					parent_obj.position = ledge_check_raycast.get_collision_point() + Vector3(0.0, move_data.ledge_climb_target_height, 0.0)
-					return ""
-		if parent_obj.is_on_wall_only():
-			parent_obj.velocity.y = max(parent_obj.velocity.y, 0.0) + move_data.wall_jump_vertical_velocity
-			parent_obj.velocity += parent_obj.get_wall_normal() * move_data.wall_jump_normal_velocity
-	return ""
+func is_moving_toward_ledge() -> bool:
+	if !is_moving_toward_wall():
+		return false
+
+	var position: Vector3 = wall_check_raycast_feet.get_collision_point()
+	ledge_check_raycast.global_position.x = position.x
+	ledge_check_raycast.global_position.y = parent_obj.global_position.y + move_data.ledge_climb_height_above_parent
+	ledge_check_raycast.global_position.z = position.z
+	ledge_check_raycast.force_raycast_update()
+
+	return ledge_check_raycast.is_colliding()
