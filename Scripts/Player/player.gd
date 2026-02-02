@@ -13,6 +13,7 @@ extends CharacterBody3D
 
 func _ready() -> void:
 	camera_holder.set_cam_rotation.connect(player_move_input_component._on_camera_holder_set_cam_rotation)
+	ledge_check_raycast.target_position.y = -abs(player_move_data.ledge_climb_raycast_distance)
 	move_state_machine.init(
 		self,
 		mesh_holder,

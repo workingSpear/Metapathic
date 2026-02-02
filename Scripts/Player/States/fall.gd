@@ -61,16 +61,15 @@ func process_input(_event: InputEvent) -> String:
 			print("hit!")
 			if wall_check_raycast_feet.get_collision_normal().angle_to(Vector3.UP) > parent_obj.floor_max_angle:
 				print("wall!")
-				const LEDGE_CHECK_HEIGHT = 1.4
 				var position: Vector3 = wall_check_raycast_feet.get_collision_point()
 				ledge_check_raycast.global_position.x = position.x
-				ledge_check_raycast.global_position.y = parent_obj.global_position.y + LEDGE_CHECK_HEIGHT
+				ledge_check_raycast.global_position.y = parent_obj.global_position.y + move_data.ledge_climb_height_above_parent
 				ledge_check_raycast.global_position.z = position.z
 				ledge_check_raycast.force_raycast_update()
 				if ledge_check_raycast.is_colliding():
 					print("ledge!")
 					# Add the height of the character model
-					parent_obj.position = ledge_check_raycast.get_collision_point() + Vector3(0.0, 1.0, 0.0)
+					parent_obj.position = ledge_check_raycast.get_collision_point() + Vector3(0.0, move_data.ledge_climb_target_height, 0.0)
 					return ""
 		if parent_obj.is_on_wall_only():
 			var WALL_JUMP_VERTICAL_VELOCITY: float = move_data.jump_vertical_velocity * 0.9

@@ -52,7 +52,7 @@ target_position = Vector3(0, 0, 1)
 [node name="LedgeCheckRaycast" type="RayCast3D" parent="." unique_id=129737479]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 enabled = false
-target_position = Vector3(0, -2.4, 0)
+target_position = Vector3(0, -3, 0)
 
 [node name="MoveStateMachine" type="Node" parent="." unique_id=564377469 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_gymyn")
