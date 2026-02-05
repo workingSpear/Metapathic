@@ -50,11 +50,9 @@ material_override = SubResource("StandardMaterial3D_o3qbn")
 use_collision = true
 size = Vector3(3.2398553, 19.063053, 10.743164)
 
-[node name="Player" parent="." unique_id=1691484442 instance=ExtResource("1_lc1oi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0508358, 0)
-
 [node name="Enemy" parent="." unique_id=355322654 instance=ExtResource("2_8od7v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.41791, 2.242251, 0)
+
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=964079330]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.058418, 10.036347, 0)
 material_override = SubResource("StandardMaterial3D_o3qbn")

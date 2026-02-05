@@ -22,11 +22,6 @@ config/name="Metapathic"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
-[display]
-
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-
 [autoload]
 
 FmodManager="*uid://cds10pm7hwn3p"
@@ -34,6 +29,11 @@ FmodServerWrapper="*uid://bf7jwxhvq127"
 BankAutoloadManager="*uid://0hwemgd81cx5"
 AudioManager="*uid://ru2yda5nphjb"
 EventManager="*uid://blitnn4ec88y1"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [dotnet]
 
