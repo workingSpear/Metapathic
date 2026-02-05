@@ -4,10 +4,10 @@ using System;
 
 // --- IMPORTANT!! --- //
 
-// the BankAutoloadManager IS A DEPENDENCY for the AudioManager and
-// EventManager; please ensure that BankAutoloadManager autoloads before the
-// AudioManager and EventManager and that BankAutoloadManager is the root for the
-// AudioManager and EventManager in order to call paths from your FMOD project.
+// the BankAutoloadManager IS A DEPENDENCY for the AudioManager and EventManager; 
+// please ensure that BankAutoloadManager autoloads before the AudioManager and 
+// EventManager, and that BankAutoloadManager is the root for the AudioManager and 
+// EventManager, in order to call paths from your FMOD project.
 
 // --- IMPORTANT!! --- //
 
