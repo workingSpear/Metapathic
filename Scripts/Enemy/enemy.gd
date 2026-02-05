@@ -3,7 +3,7 @@ extends RigidBody3D
 
 # A basic dummy enemy base class which can take damage and die.
 
-@export var max_health: float = 10
+@export var max_health: float = 10.0
 
 @onready var current_health: float = max_health
 
