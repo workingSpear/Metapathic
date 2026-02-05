@@ -14,7 +14,7 @@ func take_damage(damage) -> void:
 	current_health -= damage
 	
 	# update healthbar value
-	$"Healthbar Viewport/Healthbar".value = current_health / max_health
+	$"Healthbar Viewport/Healthbar".value = (current_health / max_health) * 100
 	
 	if (current_health <= 0):
 		current_health = 0
