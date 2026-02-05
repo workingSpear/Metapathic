@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{af196b42-0952-441a-b488-5a0d34066cc6}">
+		<property name="assetPath">
+			<value>flcl_test1.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.2115419501133786</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{63095961-3bbc-4880-a3e9-5e1fa27e3676}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -3,8 +3,7 @@ extends Node
 
 signal set_cam_rotation(cam_rotation: float)
 
-@export var yaw_node: Node3D
-@export var pitch_node: Node3D
+@export var pivot_node: Node3D
 @export var camera: Camera3D
 @export var yaw_accel: float = 15
 @export var pitch_accel: float = 15
@@ -24,16 +23,25 @@ func _ready() -> void:
 	pitch_sensitivity = player_preferences.pitch_sensitivity
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	pitch = clamp(pitch, pitch_min, pitch_max)
 
-	yaw_node.rotation_degrees.y = lerp(yaw_node.rotation_degrees.y, yaw, yaw_accel * delta)
-	pitch_node.rotation_degrees.x = lerp(pitch_node.rotation_degrees.x, pitch, pitch_accel * delta)
+	#With smoothing
+	#pivot_node.rotation_degrees.y = lerp(pivot_node.rotation_degrees.y, yaw, yaw_accel * delta)
+	#pivot_node.rotation_degrees.x = lerp(pivot_node.rotation_degrees.x, pitch, pitch_accel * delta)
 
-	set_cam_rotation.emit(yaw_node.rotation.y)
+	pivot_node.rotation_degrees.y = yaw
+	pivot_node.rotation_degrees.x = pitch
+
+	set_cam_rotation.emit(pivot_node.rotation.y)
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		yaw += -event.relative.x * yaw_sensitivity
 		pitch += -event.relative.y * pitch_sensitivity
+	if event.is_action_pressed("pause"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

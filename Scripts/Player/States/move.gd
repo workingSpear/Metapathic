@@ -3,8 +3,6 @@ extends MoveState
 
 static var state_name: String = "Move"
 
-@export var mesh_rotation_speed: float
-
 
 func get_state_name() -> String:
 	return state_name
@@ -27,8 +25,13 @@ func process_physics(delta: float) -> String:
 	parent_obj.velocity.y -= gravity * move_data.move_gravity_multiplier * delta
 	parent_obj.move_and_slide()
 
-	var target_rot = atan2(move_direction.x, move_direction.z) - parent_obj.rotation.y
-	mesh_holder.rotation.y = lerp_angle(mesh_holder.rotation.y, target_rot, mesh_rotation_speed)
+	# Rotate the mesh towards the current velocity.
+	var horizontal_velocity = Vector3(parent_obj.velocity.x, 0.0, parent_obj.velocity.z)
+	if !horizontal_velocity.is_zero_approx():
+		mesh_holder.look_at(parent_obj.position + horizontal_velocity)
+
+	#var target_rot = atan2(move_direction.x, move_direction.z) - parent_obj.rotation.y
+	#mesh_holder.rotation.y = lerp_angle(mesh_holder.rotation.y, target_rot, mesh_rotation_speed)
 
 	if move_direction.is_zero_approx() and parent_obj.velocity.is_zero_approx():
 		return Idle.state_name

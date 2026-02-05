@@ -33,6 +33,8 @@ func init(
 		mesh_holder: Node3D,
 		move_component: MoveInputComponent,
 		move_data: MoveStateData,
+		wall_check_raycast_feet: RayCast3D,
+		ledge_check_raycast: RayCast3D,
 ) -> void:
 	state_dictionary = { }
 
@@ -44,6 +46,8 @@ func init(
 		child.parent_obj = parent
 		child.mesh_holder = mesh_holder
 		child.move_component = move_component
+		child.wall_check_raycast_feet = wall_check_raycast_feet
+		child.ledge_check_raycast = ledge_check_raycast
 		child.move_data = move_data
 
 	print(owner.name + ": MoveStateMachine initialized with MoveStates:")
