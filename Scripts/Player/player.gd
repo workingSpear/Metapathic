@@ -5,7 +5,7 @@ extends CharacterBody3D
 
 # Player attack stuff for dummy enemy testing
 @export var player_attack_damage: float = 1.0
-@export var Enemy: RigidBody3D = null
+@export var enemy_node: RigidBody3D = null # assigned in editor
 
 @onready var move_state_machine: MoveStateMachine = $MoveStateMachine
 @onready var mesh_holder = $MeshHolder
@@ -46,5 +46,5 @@ func _unhandled_input(event: InputEvent) -> void:
 func attack(damage: float) -> void:
 	# Again this is a sloppy implementation to test the take_damage() function and should eventually be replaced
 	print("Player attacked!")
-	if Enemy != null:
-		Enemy.take_damage(damage)
+	if enemy_node != null:
+		enemy_node.take_damage(damage)
