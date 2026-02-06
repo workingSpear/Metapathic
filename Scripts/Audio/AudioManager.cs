@@ -31,17 +31,17 @@ public partial class AudioManager : Node
 		sfxBus = FmodServerWrapper.GetBus("bus:/SFX");
 	}
 	
-	// DESTROY - on object destruction, call and run the Cleanup method.
-	public override void _Notification(int what) {
-		if (what == NotificationPredelete) { Cleanup(); }
-	}
+	// SCENE CHANGE - on leaving scene, call and run the Cleanup method.
+	public override void _ExitTree() { Cleanup(); }
 	
 	// CLEAN-UP - stop and free all FMOD event instances currently in use by this
 	// AudioManager.
 	public void Cleanup() {
 		foreach (FmodEvent instance in eventInstances) {
-			instance.Stop(FmodServerWrapper.FMOD_STUDIO_STOP_IMMEDIATE);
-			instance.Release();
+			if (instance != null) {
+				instance.Stop(FmodServerWrapper.FMOD_STUDIO_STOP_IMMEDIATE);
+				instance.Release();
+			}
 		}
 	}
 	
